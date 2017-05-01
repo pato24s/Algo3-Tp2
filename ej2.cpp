@@ -60,7 +60,7 @@ void printArr(int dist[], int n)
 //BellmanFord robado, dada una ciudad source(src) calcula las distancias minimas entre source y el resto
 //Tambien calcula la distancia entre source y source que es lo que necesitamos
 // le agregue un k que es cuanto vamos a restarle a todos los peajes
-bool BellmanFord(struct Graph* graph, int src, int k)
+bool BellmanFord(struct Graph* graph, int k)
 {
     int V = graph->V;
     int E = graph->E;
@@ -70,7 +70,7 @@ bool BellmanFord(struct Graph* graph, int src, int k)
     // as INFINITE
     for (int i = 0; i < V; i++)
         dist[i]   = INT_MAX;
-    dist[src] = 0;
+    dist[0] = 0;
  
     // Step 2: Relax all edges |V| - 1 times. A simple shortest 
     // path from src to any other vertex can have at-most |V| - 1 
@@ -96,7 +96,8 @@ bool BellmanFord(struct Graph* graph, int src, int k)
         int u = graph->edge[i].src;
         int v = graph->edge[i].dest;
         int weight = graph->edge[i].weight-k;
-        // if (dist[u] != INT_MAX && dist[u] + weight < dist[v])
+        if (dist[u] != INT_MAX && dist[u] + weight < dist[v])
+            return true;
         //     printf("Graph contains negative weight cycle");
     }
     
@@ -104,28 +105,23 @@ bool BellmanFord(struct Graph* graph, int src, int k)
 
     //veo si puedo ir y volver a la ciudad source ganando plata
     //chequeo distancia de src a src
-    bool res=(dist[src]<0);
- 
-    return res;
+    // bool res=(dist[src]<0);
+    return false;
+    // return res;
 }
  
 int ejercicio2(struct Graph* graph, int maxPeaje){
     int reduccion;
     
+    bool perdemosPlata;
     int init=0;
     int fin=maxPeaje;
     int mid=(fin+init)/2;
     while(init<=fin){ //log(maxPeaje)
         reduccion=mid;
-        bool perdemosPlata=false;
-        for (int ciudad = 0; ciudad < graph->V; ++ciudad)//O(n) peor caso chequeo todas las ciudades 
-        {
-            //pruebo todas las ciudades como punto de partida
-            //BellmanFord==1 <-> puedo ir de source a source con costo <0 
-            perdemosPlata=perdemosPlata || BellmanFord(graph,ciudad,reduccion);//creo que bellmanFord es n*m
-            if(perdemosPlata)
-                break;
-        }
+        
+        perdemosPlata=BellmanFord(graph,reduccion);//creo que bellmanFord es n*m
+
         if(perdemosPlata){
         //si perdemos plata solucion esta entre init y mid (hay que reducir menos el precio)
             fin=mid-1;
@@ -138,8 +134,7 @@ int ejercicio2(struct Graph* graph, int maxPeaje){
 
     }  
     return reduccion;
-//me queda entonces O(n²*m*log) ?
-//ver si flasheo la catedra o hay forma de evitar algun O(n)
+//me queda entonces O(n*m*log) ?
 }
 
 
