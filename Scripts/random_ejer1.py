@@ -41,15 +41,21 @@ while(i < ejes):
 
 
 	if Matrix[c1][c2] == 0:
-		G.add_edge(c1, c2, weight=peso )
+		color = 'k'
+		if premium ==1:
+			color = 'b'
+		G.add_edge(c1, c2,color=color, weight=peso )
 		Matrix[c1][c2]=1
 		Matrix[c2][c1]=1
 		print str(c1) + " " +str(c2)+" "+ str(premium) + " " + str(peso)
 		i+=1
-pos=nx.spring_layout(G)
-nx.draw(G,pos,with_labels=True)
-# specifiy edge labels explicitly
-# edge_labels=dict([((u,v,),d['weight'])
-#              for u,v,d in G.edges(data=True)])
-# nx.draw_networkx_edge_labels(G,pos,edge_labels=edge_labels)
-plt.savefig("path.png")
+
+
+edges = G.edges()
+colors = [G[u][v]['color'] for u,v in edges]
+pos=nx.circular_layout(G)
+nx.draw_circular(G,with_labels=True )
+labels = nx.get_edge_attributes(G,'weight')
+nx.draw_networkx_edge_labels(G,pos,edge_color=colors,edge_labels=labels)
+nx.draw(G, pos, edges=edges, edge_color=colors)
+plt.savefig("random.png")

@@ -1,6 +1,13 @@
-python random_ejer1.py n m > salida_texto
+random_ejer1:
+	python random_ejer1.py n m > salida_texto
 
-ejemplo: 
-python random_ejer1.py 10 15 > in.txt
-guarda en in.txt un grafo con el formato de entrada requerido para el ejercicio 1 y
-además guarda en path.png el dibujo de ese grafo (falta ver como poner labels a las aristas)
+	ejemplo: 
+	python random_ejer1.py 10 15 > in.txt
+	guarda en in.txt un grafo con el formato de entrada requerido para el ejercicio 1 y
+	además guarda en random.png el dibujo
+
+
+txtToGraph.py
+	python txtToGraph.py < in.txt
+
+	recibe una instancia con el formado de la catedra y dibuja el grafo asociado.
