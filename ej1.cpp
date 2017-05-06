@@ -15,9 +15,9 @@ class Graph
 		~Graph(); 
 		void agregarArista(int,int,int,bool);
 		vector<vector<pair<int,bool> > > matriz; 
+		int E;
 	private:
 		int V;
-		int E;
 
 };
 Graph::~Graph(){}
@@ -42,6 +42,7 @@ void Graph::agregarArista(int u, int v, int peso, bool premium){
 	pair<int,bool> aux(peso,premium);
 	matriz[u][v] = aux;
 	matriz[v][u] = aux;
+	E++;
 }
 
 
@@ -81,6 +82,7 @@ int main(){
         	cout<<endl;
         }
         cout<<endl;
+        cout<<grafo.E<<endl;
     }
 
     return 0;
