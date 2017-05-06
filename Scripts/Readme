@@ -1,0 +1,6 @@
+python random_ejer1.py n m > salida_texto
+
+ejemplo: 
+python random_ejer1.py 10 15 > in.txt
+guarda en in.txt un grafo con el formato de entrada requerido para el ejercicio 1 y
+además guarda en path.png el dibujo de ese grafo (falta ver como poner labels a las aristas)
