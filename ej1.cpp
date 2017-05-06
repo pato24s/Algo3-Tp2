@@ -16,8 +16,8 @@ class Graph
 		void agregarArista(int,int,int,bool);
 		vector<vector<pair<int,bool> > > matriz; 
 		int E;
-	private:
 		int V;
+	private:
 
 };
 Graph::~Graph(){}
@@ -45,9 +45,71 @@ void Graph::agregarArista(int u, int v, int peso, bool premium){
 	E++;
 }
 
+int proximoNodo(pair<int,int> dist[], bool visitados[], int V){
+	int min= INT_MAX;
+	int min_index;
+
+	for (int i = 0; i < V; i++)
+	{
+		if(visitados[i] ==false && dist[i].first <=min){
+			min = dist[i].first;
+			min_index = i;
+		}
+	}
+	return min_index;
+}
+
+int ejercicio1(Graph &grafo,int src, int dest, int k ){
+	int V = grafo.V;
+	pair<int,int> dist[V];
+	bool visitados[V];
+
+	pair<int,int> tuplaINF(INT_MAX,0);
+	pair<int,int> tuplaCero(0,0);
+
+	for(int i =0; i<V;i++){
+		dist[i]=tuplaINF;
+		visitados[i]=false;
+	}
+
+	dist[src]=tuplaCero;
+
+
+	for (int count = 0; count < V-1; count++){
+
+		int elegido = proximoNodo(dist,visitados, V);
+		bool marcarPadre = false;
+		visitados[elegido] = true;
+
+		for (int v = 0; v < V; v++){
+			
+			if(!visitados[v] && grafo.matriz[elegido][v].first && dist[elegido].first != INT_MAX && dist[elegido].first + grafo.matriz[elegido][v].first < dist[v].first){
+				pair<int,int> aux(dist[elegido].first + grafo.matriz[elegido][v].first , dist[elegido].second + grafo.matriz[elegido][v].second );
+				dist[v] = aux;
+			}
+			//si algun camino se pasa de k lo pongo como infinito
+			if(dist[v].second>k){
+				dist[v].first = INT_MAX;
+				marcarPadre = true;
+			}
+
+
+
+		}
+		//si despues de actualizar a todos el padre esta marcado
+		if(marcarPadre){
+			dist[elegido].first =INT_MAX;
+			visitados[elegido] = false;
+		}
+	}
+	if(dist[dest].first==INT_MAX)
+		return -1;
+	return dist[dest].first;	
+}
 
 
 int main(){   
+    int j=0;
     while(1){
         int V;
         int E;
@@ -71,7 +133,6 @@ int main(){
           	grafo.agregarArista(c1,c2,peso,premium);
             // addEdge(graph,i,c1,c2,p);
         }
-        // cout<<"sol entrada "<<j<<": "<<ejercicio2(graph,maxPeaje)<<endl;
 
         for (int i = 0; i < V; ++i)
         {
@@ -82,7 +143,10 @@ int main(){
         	cout<<endl;
         }
         cout<<endl;
-        cout<<grafo.E<<endl;
+        // cout<<grafo.E<<endl;
+        // cout<<"src: "<<src<<" dst: "<<dst<<" k: "<<k<<endl;
+        cout<<"salida instancia "<<j<<": "<<ejercicio1(grafo,src,dst,k)<<endl;
+        j++;
     }
 
     return 0;

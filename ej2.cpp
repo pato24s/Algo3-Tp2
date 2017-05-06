@@ -91,6 +91,8 @@ bool BellmanFord(struct Graph* graph, int k)
     // guarantees shortest distances if graph doesn't contain 
     // negative weight cycle.  If we get a shorter path, then there
     // is a cycle.
+
+    //Esta parte es lo que necesitamos en el punto 2!
     for (int i = 0; i < E; i++)
     {
         int u = graph->edge[i].src;
@@ -98,16 +100,10 @@ bool BellmanFord(struct Graph* graph, int k)
         int weight = graph->edge[i].weight-k;
         if (dist[u] != INT_MAX && dist[u] + weight < dist[v])
             return true;
-        //     printf("Graph contains negative weight cycle");
     }
     
-    // printArr(dist, V);
 
-    //veo si puedo ir y volver a la ciudad source ganando plata
-    //chequeo distancia de src a src
-    // bool res=(dist[src]<0);
     return false;
-    // return res;
 }
  
 int ejercicio2(struct Graph* graph, int maxPeaje){
