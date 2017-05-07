@@ -72,15 +72,18 @@ int ejercicio1(Graph &grafo,int src, int dest, int k ){
 		dist[i]=tuplaINF;
 		visitados[i]=false;
 	}
-	cout<<dest<<endl;
 	dist[src]=tuplaCero;
 
 	int elegido=-1;
-	for (int count = 0; count < V+k; count++){ //ver si tengo que poner un int como cota o hacer un while hasta que distancias[dst] sea modificado
+	while(!termine){ //ver si tengo que poner un int como cota o hacer un while hasta que distancias[dst] sea modificado
 		elegido = proximoNodo(dist,visitados, V);
+		cout<<elegido<<endl;
 		bool marcarPadre = false;
 		visitados[elegido] = true;
-
+		if(elegido==dest){
+			termine=true;
+			break;
+		}
 		for (int v = 0; v < V; v++){
 			
 			if(!visitados[v] && grafo.matriz[elegido][v].first && dist[elegido].first != INT_MAX && dist[elegido].first + grafo.matriz[elegido][v].first < dist[v].first){
@@ -90,25 +93,18 @@ int ejercicio1(Graph &grafo,int src, int dest, int k ){
 				if(dist[v].second>k){
 					dist[v].first = INT_MAX;
 					marcarPadre = true;
-				}else{
-					if(v==dest && dist[v].first < INT_MAX){
-						termine = true;
-						break;
-					}
-					
 				}
 			}
 			//si algun camino se pasa de k lo pongo como infinito
 		}
-		if(termine){
-			return dist[dest].first;
-		}
+	
 		//si despues de actualizar a todos el padre esta marcado
 		if(marcarPadre){
 			dist[elegido].first =INT_MAX;
 			visitados[elegido] = false;
 		}
 	}
+
 	if(dist[dest].first==INT_MAX)
 		return -1;
 	return dist[dest].first;	
