@@ -26,42 +26,86 @@ class eje{
 		int v;
 		int peso;
 		int premium;
-}
+};
 
-class GrafoConPeso{
+class Grafo{
 	public:
-		//Crea un grafo vacio
-		GrafoConPeso();
-		
-		//Crea un grafo con V vertices disconexos
-		GrafoConPeso(int V);
 
-		~GrafoConPeso() {};
+		Grafo() {};
+		Grafo(int Ve);
+		~Grafo() {};
 
-		void agregarEje(eje e);
 
-	private:
-		vector<vector<int> > matriz;
+		virtual agregarEje(int u, int v);
+
+		//Getters
+		V() {return V};
+		E() {return E};
+
+	protected:
+		vector<vector<pair<int, bool> > > matriz;
 		int V;
 		int E;
 
-}
+};
 
-class GrafoConPremium{
+
+//Ejercicio 1. Grafo no dirigido con peso en los ejes y un booleano que indica si la ruta es o no premium
+class GrafoConPremium : public Grafo{
 	public:
 		//Crea un grafo vacio
-		GrafoConPremium();
+		GrafoConPremium() {};
 		
-		//Crea un grafo con V vertices disconexos
-		GrafoConPremium(int V);
+		//Crea un grafo con Ve vertices disconexos
+		GrafoConPremium(int Ve);
 
 		~GrafoConPremium() {};
 
-		void agregarEje(eje e);
+		void agregarEje(int u, int v, int peso, bool premium);
 
 	private:
 		vector<vector<pair<int, bool> > > matriz;
 		int V;
 		int E;
 
-}
+};
+
+//Ejercicio 2. Grafo dirigido con pesos.
+class DigrafoConPeso : public Grafo{
+	public:
+		//Crea un grafo vacio
+		GrafoConPeso() {};
+		
+		//Crea un grafo con Ve vertices disconexos
+		GrafoConPeso(int Ve);
+
+		~GrafoConPeso() {};
+
+		void agregarEje(int u, int v, int peso);
+	
+	private:
+		vector<vector<int> > matriz;
+		int V;
+		int E;
+
+};
+
+//Ejercicio 3. Grafo no dirigido con pesos.
+class GrafoConPeso : public Grafo{
+	public:
+		//Crea un grafo vacio
+		GrafoConPeso() {};
+		
+		//Crea un grafo con Ve vertices disconexos
+		GrafoConPeso(int Ve);
+
+		~GrafoConPeso() {};
+
+		void agregarEje(int u, int v, int peso);
+
+	private:
+		vector<vector<int> > matriz;
+		int V;
+		int E;
+
+};

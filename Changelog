@@ -1,0 +1,9 @@
+Changelog
+
+7/5/17
+	- Nueva clase base Grafo, de la que heredan todas las otras.
+	- Nueva clase DigrafoConPeso. 
+	- Cambios en el espaciado entre operadores (ej a+b -> a + b). 
+	- Remocion de codigo inutil reemplazado por las clases placeholder viejas.
+	- Agregado de funciones getters a todas las clases de grafos (para obtener V y E, que son privadas).
+	- Se movio el codigo de los algoritmos y sus auxiliares a metodos.cpp. Los ejX.cpp solo contienen el main de cada ejer.

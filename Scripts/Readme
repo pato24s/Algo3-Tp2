@@ -10,4 +10,4 @@ random_ejer1:
 txtToGraph.py
 	python txtToGraph.py < in.txt
 
-	recibe una instancia con el formado de la catedra y dibuja el grafo asociado.
+	recibe una instancia con el formato de la catedra y dibuja el grafo asociado.
