@@ -1,4 +1,8 @@
-/* ------------------ Ejer 1 ------------------------------------- */
+#include "metodos.h"	//Metodos de camino minimo
+
+using namespace std;
+
+/* ------------------ Ejer 1 ------------------ */
 
 int proximoNodo(pair<int,int> dist[], bool visitados[], int V){
 	int min = INT_MAX;
@@ -16,7 +20,7 @@ int proximoNodo(pair<int,int> dist[], bool visitados[], int V){
 
 int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
 	bool termine = false;
-	int V = grafo.V();
+	int V = grafo.dameV();
 	pair<int, int> dist[V];
 	bool visitados[V];
 
@@ -29,45 +33,51 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
 	}
 	
 	dist[src] = tuplaCero;
-	int elegido = -1;
+	int elegido;
 	
 	while(!termine){ //ver si tengo que poner un int como cota o hacer un while hasta que distancias[dst] sea modificado
 		elegido = proximoNodo(dist,visitados, V);
-		cout<<elegido<<endl;
+		//DEBUG
+		cout << "El nodo elegido es: " << elegido << endl;
+		
 		bool marcarPadre = false;
 		visitados[elegido] = true;
-		if(elegido==dest){
-			termine=true;
+		if(elegido == dest){
+			termine = true;
 			break;
 		}
 		for (int v = 0; v < V; v++){
 			
-			if(!visitados[v] && grafo.matriz[elegido][v].first && dist[elegido].first != INT_MAX && dist[elegido].first + grafo.matriz[elegido][v].first < dist[v].first){
-				pair<int,int> aux(dist[elegido].first + grafo.matriz[elegido][v].first , dist[elegido].second + grafo.matriz[elegido][v].second );
-				dist[v] = aux;
-				// cout<<"v en if: "<<v<<endl;
-				if(dist[v].second>k){
+			if(!visitados[v] && grafo.conectados(elegido, v) && dist[elegido].first != INT_MAX && (dist[elegido].first + grafo.peso(elegido, v)) < dist[v].first){
+				//Creo par <distancia minima a elegido, rutas premium usadas hasta el momento>
+				pair<int, int> tuplaCamino(dist[elegido].first + grafo.peso(elegido, v), dist[elegido].second + grafo.esPremium(elegido, v));
+				dist[v] = tuplaCamino;
+				// cout << "v en if: " << v<< endl;
+				if(dist[v].second > k){
+					//Si algun camino se pasa de k lo pongo como infinito
 					dist[v].first = INT_MAX;
 					marcarPadre = true;
 				}
 			}
-			//si algun camino se pasa de k lo pongo como infinito
+			
 		}
 	
-		//si despues de actualizar a todos el padre esta marcado
+		//Si despues de actualizar a todos el padre esta marcado, pongo el actual como no visitado.
 		if(marcarPadre){
-			dist[elegido].first =INT_MAX;
+			dist[elegido].first = INT_MAX;
 			visitados[elegido] = false;
 		}
 	}
 
-	if(dist[dest].first==INT_MAX)
+	if(dist[dest].first == INT_MAX){
 		return -1;
+	}
+	
 	return dist[dest].first;	
 }
 
 
-/* ------------------ Ejer 2 ------------------------------------- */
+/* ------------------ Ejer 2 ------------------ */
 
 // a structure to represent a weighted edge in graph
 struct Edge

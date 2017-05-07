@@ -1,10 +1,24 @@
 CC=g++
-CFLAGS=-std=c++11
+CFLAGS=-std=c++11 -g
 
-objects = ej1 ej2
-all: $(objects)
+EJS = ej1 ej2
+DEPS =  grafos.h metodos.h
+OBJS = grafos.o metodos.o
+
+all: ej1
+
+ej1: ej1.o grafos.o metodos.o
+	$(CC) $(CFLAGS) -o $@ $^
+
+ej2: ej2.o grafos.o metodos.o
+	$(CC) $(CFLAGS) -o $@ $^
+
+
+%.o: %.cpp %$(DEPS)
+	$(CC) $(CFLAGS) -c -o $@ $^
+
+
 clean: 
-	rm -f $(objects)
+	rm -f $(EJS)
+	rm -f $(OBJS)
 
-$(objects): %: %.cpp
-	$(CC) $(CFLAGS) -o $@ $<

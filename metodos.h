@@ -1,3 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <limits.h>
+#include <iostream>     // std::cout
+#include <algorithm>    // std::sort
+#include <vector>       // std::vector
+#include <utility>
+#include "grafos.h"		//Clases de grafos
+
+/* ------------------ Constantes y defines ------------------ */
+
+
 /* ------------------ Ejer 1 ------------------------------------- */
 int proximoNodo(pair<int,int> dist[], bool visitados[], int V);
 

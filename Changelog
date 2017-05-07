@@ -7,3 +7,10 @@ Changelog
 	- Remocion de codigo inutil reemplazado por las clases placeholder viejas.
 	- Agregado de funciones getters a todas las clases de grafos (para obtener V y E, que son privadas).
 	- Se movio el codigo de los algoritmos y sus auxiliares a metodos.cpp. Los ejX.cpp solo contienen el main de cada ejer.
+	- Metodo conectados(int u, int v) para todas las clases de grafos, que devuelve si u y v estan conectados.
+
+	- En el ejercicio 1:
+
+		- No es necesario inicializar elegido en -1, se pisa con proximoNodo.
+		- Es necesario tener un bool termine si estamos haciendo un break?
+		- Cambios de nombres de variables como aux a cosas mas declarativas (detalles nomas...)

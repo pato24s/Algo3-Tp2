@@ -3,19 +3,18 @@
 //Metodos de Grafo
 
 Grafo::Grafo(int Ve){
-	vector<vector<int> > mat;
 	for (int i = 0; i < Ve; i++){
 		vector<int> fila;
 
 		for(int j = 0 ; j < Ve; j++){
 			fila.push_back(0);
 		}
-		mat.push_back(fila);
+		matriz.push_back(fila);
 	}
 	
 	V = Ve;
 	E = 0;
-	matriz = mat;
+	
 }
 
 void Grafo::agregarEje(int u, int v){
@@ -36,76 +35,13 @@ void Grafo::agregarEje(int u, int v){
 	E++;
 }
 
-//Metodos de GrafoConPeso
-
-GrafoConPeso::GrafoConPeso(int Ve){
-	vector<vector<int> > mat;
-	for (int i = 0; i < Ve; i++){
-		vector<int> fila;
-
-		for(int j = 0 ; j < Ve; j++){
-			fila.push_back(0);
-		}
-		mat.push_back(fila);
+bool Grafo::conectados(int u, int v){
+	if(matriz[u][v]){
+		return true;
 	}
-	
-	V = Ve;
-	E = 0;
-	matriz = mat;
+	return false;
 }
 
-void GrafoConPeso::agregarEje(int u, int v, int peso){
-	//Si u o v son mas grandes que V, estoy agregando vertices al grafo ademas de aristas. Agrando la matriz
-	if(u > V){
-		matriz.resize(u);
-		for(int i = 0; i < matriz.size(); i++){
-			matriz[i].resize(u);
-		}
-	} else if(v > V){
-		matriz.resize(v);
-		for(int i = 0; i < matriz.size(); i++){
-			matriz[i].resize(v);
-		}
-	}
-	matriz[u][v] = peso;
-	matriz[v][u] = peso;
-	E++;
-}
-
-//Metodos de DigrafoConPeso
-
-DigrafoConPeso::DigrafoConPeso(int Ve){
-	vector<vector<int> > mat;
-	for (int i = 0; i < Ve; i++){
-		vector<int> fila;
-
-		for(int j = 0 ; j < Ve; j++){
-			fila.push_back(0);
-		}
-		mat.push_back(fila);
-	}
-	
-	V = Ve;
-	E = 0;
-	matriz = mat;
-}
-
-void DigrafoConPeso::agregarEje(int u, int v, int peso){
-	//Si u o v son mas grandes que V, estoy agregando vertices al grafo ademas de aristas. Agrando la matriz
-	if(u > V){
-		matriz.resize(u);
-		for(int i = 0; i < matriz.size(); i++){
-			matriz[i].resize(u);
-		}
-	} else if(v > V){
-		matriz.resize(v);
-		for(int i = 0; i < matriz.size(); i++){
-			matriz[i].resize(v);
-		}
-	}
-	matriz[u][v] = peso;
-	E++;
-}
 
 //Metodos de GrafoConPremium
 
@@ -120,12 +56,12 @@ GrafoConPremium::GrafoConPremium(int Ve){
 			fila.push_back(pNull);
 		}
 		
-		mat.push_back(fila);
+		matriz.push_back(fila);
 	}
 	
 	V = Ve;
 	E = 0;
-	matriz = mat;
+	
 }
 
 void GrafoConPremium::agregarEje(int u, int v, int peso, bool premium){
@@ -147,3 +83,101 @@ void GrafoConPremium::agregarEje(int u, int v, int peso, bool premium){
 	matriz[v][u] = aux;
 	E++;
 }
+
+bool GrafoConPremium::conectados(int u, int v){
+	if(matriz[u][v].first){
+		return true;
+	}
+	return false;
+}
+
+int GrafoConPremium::peso(int u, int v){
+	return matriz[u][v].first;
+}
+
+int GrafoConPremium::esPremium(int u, int v){
+	if(matriz[u][v].second){
+		return 1;
+	}
+	return 0;
+}
+
+//Metodos de DigrafoConPeso
+
+DigrafoConPeso::DigrafoConPeso(int Ve){
+	for (int i = 0; i < Ve; i++){
+		vector<int> fila;
+
+		for(int j = 0 ; j < Ve; j++){
+			fila.push_back(0);
+		}
+		matriz.push_back(fila);
+	}
+	
+	V = Ve;
+	E = 0;
+	
+}
+
+void DigrafoConPeso::agregarEje(int u, int v, int peso){
+	//Si u o v son mas grandes que V, estoy agregando vertices al grafo ademas de aristas. Agrando la matriz
+	if(u > V){
+		matriz.resize(u);
+		for(int i = 0; i < matriz.size(); i++){
+			matriz[i].resize(u);
+		}
+	} else if(v > V){
+		matriz.resize(v);
+		for(int i = 0; i < matriz.size(); i++){
+			matriz[i].resize(v);
+		}
+	}
+	matriz[u][v] = peso;
+	E++;
+}
+
+int DigrafoConPeso::peso(int u, int v){
+	return matriz[u][v];
+}
+
+//Metodos de GrafoConPeso
+
+GrafoConPeso::GrafoConPeso(int Ve){
+	for (int i = 0; i < Ve; i++){
+		vector<int> fila;
+
+		for(int j = 0 ; j < Ve; j++){
+			fila.push_back(0);
+		}
+		matriz.push_back(fila);
+	}
+	
+	V = Ve;
+	E = 0;
+	
+}
+
+void GrafoConPeso::agregarEje(int u, int v, int peso){
+	//Si u o v son mas grandes que V, estoy agregando vertices al grafo ademas de aristas. Agrando la matriz
+	if(u > V){
+		matriz.resize(u);
+		for(int i = 0; i < matriz.size(); i++){
+			matriz[i].resize(u);
+		}
+	} else if(v > V){
+		matriz.resize(v);
+		for(int i = 0; i < matriz.size(); i++){
+			matriz[i].resize(v);
+		}
+	}
+	matriz[u][v] = peso;
+	matriz[v][u] = peso;
+	E++;
+}
+
+int GrafoConPeso::peso(int u, int v){
+	return matriz[u][v];
+}
+
+
+
