@@ -3,8 +3,7 @@
 using namespace std;
 
 int main(){   
-    cout << "Ejercicio 1!" << endl;
-    cout << "Ingrese un numero" << endl;
+    // cout << "Ejercicio 1!" << endl;
     int j = 0;
     while(1){
         int V;
@@ -28,18 +27,18 @@ int main(){
           	grafo.agregarEje(c1 - 1 , c2 - 1, peso, premium);
         }
 
-        for (int i = 0; i < V; ++i)
-        {
-        	for (int j = 0; j < V; ++j)
-        	{
-        		cout << "(" << grafo.peso(i, j) << "," << grafo.esPremium(i, j) <<")";
-        		if(j != V - 1){
-        			cout << ", ";
-        		}
-        	}
-        	cout << endl;
-        }
-        cout << endl;
+        // for (int i = 0; i < V; ++i)
+        // {
+        // 	for (int j = 0; j < V; ++j)
+        // 	{
+        // 		cout << "(" << grafo.peso(i, j) << "," << grafo.esPremium(i, j) <<")";
+        // 		if(j != V - 1){
+        // 			cout << ", ";
+        // 		}
+        // 	}
+        // 	cout << endl;
+        // }
+        // cout << endl;
         // cout<<grafo.E<<endl;
         // cout<<"src: "<<src<<" dst: "<<dst<<" k: "<<k<<endl;
         cout<<"salida instancia " << j << ": "<< ejercicio1(grafo, src, dst, k) << endl;

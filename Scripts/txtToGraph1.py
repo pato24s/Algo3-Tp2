@@ -12,7 +12,7 @@ G=nx.Graph()
 linea0 = raw_input().split(' ')
 nodos = int(linea0[0])
 ejes = int(linea0[1])
-G.add_nodes_from([1,nodos-1])
+G.add_nodes_from([1,nodos])
 
 linea1 = raw_input().split(' ')
 src = linea1[0]

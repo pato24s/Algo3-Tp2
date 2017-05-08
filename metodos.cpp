@@ -4,76 +4,70 @@ using namespace std;
 
 /* ------------------ Ejer 1 ------------------ */
 
-int proximoNodo(pair<int,int> dist[], bool visitados[], int V){
+pair<int,int> proximoNodo(int filas, int cols,vector<vector<pair<int,int> > > &dist, vector<vector<bool> > &visitados){
 	int min = INT_MAX;
-	int min_index;
+	// int min_index;
+    pair<int,int> min_ij;
 
-	for (int i = 0; i < V; i++)
-	{
-		if(visitados[i] == false && dist[i].first <= min){
-			min = dist[i].first;
-			min_index = i;
-		}
-	}
-	return min_index;
+
+    for (int i = 0; i < filas+1; i++){
+        
+        for (int j = 0; j < cols; j++){
+            pair<int,int> indices(i,j);
+            if(visitados[i][j]==false && dist[i][j].first <=min){
+                min = dist[i][j].first;
+                min_ij = indices;
+            }    
+        }
+    }
+    return min_ij;
 }
 
 int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
-	bool termine = false;
-	int V = grafo.dameV();
-	pair<int, int> dist[V];
-	bool visitados[V];
+    bool termine = false;
+    int V = grafo.dameV();
 
-	pair<int, int> tuplaInf(INT_MAX, 0);
 	pair<int, int> tuplaCero(0, 0);
+    pair<int, int> tuplaInf(INT_MAX, 0);
+    vector<vector<pair<int,int> > > dist(k+1, vector<pair<int,int> >(V,tuplaInf));
+    vector<vector<bool> > visitados(k+1, vector<bool>(V,false));
+	
+	dist[0][src-1] = tuplaCero;
+	pair<int,int> elegido;
+    
+    for (int count = 0; count < (V*k)-1; count++){
+        elegido = proximoNodo(k,V,dist, visitados);
+        // cout<<"elegido: ("<<elegido.first<<","<<elegido.second+1<<")"<<endl;
+        int nivel=elegido.first;
+        int nodo=elegido.second;
 
-	for(int i = 0; i < V; i++){
-		dist[i] = tuplaInf;
-		visitados[i] = false;
-	}
-	
-	dist[src] = tuplaCero;
-	int elegido;
-	
-	while(!termine){ //ver si tengo que poner un int como cota o hacer un while hasta que distancias[dst] sea modificado
-		elegido = proximoNodo(dist,visitados, V);
-		//DEBUG
-		cout << "El nodo elegido es: " << elegido << endl;
-		
-		bool marcarPadre = false;
-		visitados[elegido] = true;
-		if(elegido == dest){
-			termine = true;
-			break;
-		}
-		for (int v = 0; v < V; v++){
-			
-			if(!visitados[v] && grafo.conectados(elegido, v) && dist[elegido].first != INT_MAX && (dist[elegido].first + grafo.peso(elegido, v)) < dist[v].first){
-				//Creo par <distancia minima a elegido, rutas premium usadas hasta el momento>
-				pair<int, int> tuplaCamino(dist[elegido].first + grafo.peso(elegido, v), dist[elegido].second + grafo.esPremium(elegido, v));
-				dist[v] = tuplaCamino;
-				// cout << "v en if: " << v<< endl;
-				if(dist[v].second > k){
-					//Si algun camino se pasa de k lo pongo como infinito
-					dist[v].first = INT_MAX;
-					marcarPadre = true;
-				}
-			}
-			
-		}
-	
-		//Si despues de actualizar a todos el padre esta marcado, pongo el actual como no visitado.
-		if(marcarPadre){
-			dist[elegido].first = INT_MAX;
-			visitados[elegido] = false;
-		}
-	}
+        visitados[nivel][nodo] = true;
+    
+        
+        for (int ik = 0; ik < k+1; ik++){
+            for (int v = 0; v < V; v++){
+                if(!visitados[ik][v] && ik>=nivel && grafo.conectados(nodo,v) && dist[nivel][nodo].first != INT_MAX && dist[nivel][nodo].first +grafo.peso(nodo,v) < dist[ik][v].first){
+                    pair<int,int>tuplaCamino(dist[nivel][nodo].first + grafo.peso(nodo,v), dist[nivel][nodo].second + grafo.esPremium(nodo,v));
+                    int nuevoNivel=nivel + grafo.esPremium(nodo,v);
+                    if(nuevoNivel<=k && dist[nuevoNivel][v].first==INT_MAX){
+                        dist[nuevoNivel][v]=tuplaCamino;
+                        // cout<<" actualizando a: ("<<nuevoNivel<<","<<v+1<<") con valores: ("<<tuplaCamino.first<<","<<tuplaCamino.second<<")"<<endl;
+                    }
+                }
+            }
+        }
+    }
 
-	if(dist[dest].first == INT_MAX){
-		return -1;
-	}
-	
-	return dist[dest].first;	
+    int result = INT_MAX;
+    for(int i=0; i<k+1;i++){
+        if(dist[i][dest-1].first < result){
+            result = dist[i][dest-1].first;
+        }
+    }
+    if(result==INT_MAX)
+        return -1;
+    return result;
+
 }
 
 
