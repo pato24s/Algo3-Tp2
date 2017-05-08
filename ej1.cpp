@@ -24,6 +24,7 @@ int main(){
         for (int i = 0; i < E; ++i)
         {
             cin >> c1 >> c2 >> premium >> peso;
+          	//Se resta 1 a c1 y c2 porque indexamos desde 0
           	grafo.agregarEje(c1 - 1 , c2 - 1, peso, premium);
         }
 
@@ -41,7 +42,8 @@ int main(){
         // cout << endl;
         // cout<<grafo.E<<endl;
         // cout<<"src: "<<src<<" dst: "<<dst<<" k: "<<k<<endl;
-        cout<<"salida instancia " << j << ": "<< ejercicio1(grafo, src, dst, k) << endl;
+        //Se resta 1 a src y dst porque indexamos desde 0
+        cout<<"salida instancia " << j << ": "<< ejercicio1(grafo, src - 1, dst - 1, k) << endl;
         j++;
     }
 
