@@ -37,7 +37,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
     
     for (int count = 0; count < (V*k)-1; count++){
         elegido = proximoNodo(k,V,dist, visitados);
-        // cout<<"elegido: ("<<elegido.first<<","<<elegido.second+1<<")"<<endl;
+        cout<<"elegido: ("<<elegido.first<<","<<elegido.second+1<<")"<<endl;
         int nivel=elegido.first;
         int nodo=elegido.second;
 
@@ -46,12 +46,13 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
         
         for (int ik = 0; ik < k+1; ik++){
             for (int v = 0; v < V; v++){
-                if(!visitados[ik][v] && ik>=nivel && grafo.conectados(nodo,v) && dist[nivel][nodo].first != INT_MAX && dist[nivel][nodo].first +grafo.peso(nodo,v) < dist[ik][v].first){
+                if(!visitados[ik][v] && ik==nivel && grafo.conectados(nodo,v) && dist[nivel][nodo].first != INT_MAX && dist[nivel][nodo].first +grafo.peso(nodo,v) < dist[ik][v].first){
                     pair<int,int>tuplaCamino(dist[nivel][nodo].first + grafo.peso(nodo,v), dist[nivel][nodo].second + grafo.esPremium(nodo,v));
                     int nuevoNivel=nivel + grafo.esPremium(nodo,v);
-                    if(nuevoNivel<=k && dist[nuevoNivel][v].first==INT_MAX){
+                    if(nuevoNivel<=k){
                         dist[nuevoNivel][v]=tuplaCamino;
-                        // cout<<" actualizando a: ("<<nuevoNivel<<","<<v+1<<") con valores: ("<<tuplaCamino.first<<","<<tuplaCamino.second<<")"<<endl;
+                        // cout<<"v: "<<v<<" ,ik: "<<ik<<endl;
+                        cout<<" actualizando a: ("<<nuevoNivel<<","<<v+1<<") con valores: ("<<tuplaCamino.first<<","<<tuplaCamino.second<<")"<<endl;
                     }
                 }
             }

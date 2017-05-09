@@ -43,7 +43,7 @@ int main(){
         // cout<<grafo.E<<endl;
         // cout<<"src: "<<src<<" dst: "<<dst<<" k: "<<k<<endl;
         //Se resta 1 a src y dst porque indexamos desde 0
-        cout<<"salida instancia " << j << ": "<< ejercicio1(grafo, src - 1, dst - 1, k) << endl;
+        cout<<"salida instancia " << j << ": "<< ejercicio1(grafo, src, dst, k) << endl;
         j++;
     }
 
