@@ -14,3 +14,16 @@ Changelog
 		- No es necesario inicializar elegido en -1, se pisa con proximoNodo.
 		- Es necesario tener un bool termine si estamos haciendo un break?
 		- Cambios de nombres de variables como aux a cosas mas declarativas (detalles nomas...)
+
+9/5/17
+	- Agrego un comentario //DEBUG antes de cada cout o test, para despues encontrar mas facil el codigo a borrar de la version final.
+
+	- Cambios a la clase DigrafoConPeso, para el ejercicio 2. Agrego metodos para iterar las aristas.
+
+	- Modificacion al main del ejer2 para que utilice la clase DigrafoConPeso. Falta actualizar el metodo en si.
+
+	-En el ejercicio 1:
+
+		- En proximoNodo, ahora el par indices se crea solo si se cumple la condicion. Se estaban creando muchos pares inutiles.
+		- Optimizacion para terminar de actualizar nodos si ya actualice el nodo destino.
+		- El main del ejer1 le pasa src y dest con un -1, por temas de indexacion (no se porque lo cambiaron).

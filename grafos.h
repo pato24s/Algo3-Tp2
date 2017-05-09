@@ -2,10 +2,10 @@
 
 using namespace std;
 
-class eje{
+class Eje{
 	public:
 		//Varios constructores para distintos tipos de ejes (con o sin peso, premium o no premium)
-		eje(int n1, int n2, int p, int prem): u(n1), v(n2), peso(p), premium(prem) {}
+		eje(int n1, int n2, int p, int prem): u(n1), v(n2), peso(p), premium(prem) {} //No se usa
 		eje(int n1, int n2, int p): u(n1), v(n2), peso(p), premium(-1) {}
 		eje(int n1, int n2): u(n1), v(n2), peso(0), premium(-1) {}
 		
@@ -105,7 +105,15 @@ class DigrafoConPeso : public Grafo{
 		//Requiere que conectados(u, v) sea true. Devuelve el peso de la conexion entre u y v. 
 		int peso(int u, int v);
 
+		//Devuelve un iterador al inicio de la lista de aristas. Puede modificar elementos.
+		set<Eje>::iterator aristasInicio();
+
+		//Devuelve un iterador al final de la lista de aristas. Puede modificar elementos.
+		set<Eje>::iterator aristasFin();
+
+
 	private:
+		set<Eje> aristas;
 		int V;
 		int E;
 

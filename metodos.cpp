@@ -4,17 +4,14 @@ using namespace std;
 
 /* ------------------ Ejer 1 ------------------ */
 
-pair<int,int> proximoNodo(int filas, int cols,vector<vector<pair<int,int> > > &dist, vector<vector<bool> > &visitados){
+pair<int,int> proximoNodo(int filas, int cols, vector<vector<pair<int,int> > > &dist, vector<vector<bool> > &visitados){
 	int min = INT_MAX;
-	// int min_index;
     pair<int,int> min_ij;
 
-
-    for (int i = 0; i < filas+1; i++){
-        
+    for (int i = 0; i < filas + 1; i++){
         for (int j = 0; j < cols; j++){
-            pair<int,int> indices(i,j);
-            if(visitados[i][j]==false && dist[i][j].first <=min){
+            if(visitados[i][j] == false && dist[i][j].first <= min){
+            	pair<int,int> indices(i,j);
                 min = dist[i][j].first;
                 min_ij = indices;
             }    
@@ -29,30 +26,54 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
 
 	pair<int, int> tuplaCero(0, 0);
     pair<int, int> tuplaInf(INT_MAX, 0);
-    vector<vector<pair<int,int> > > dist(k+1, vector<pair<int,int> >(V,tuplaInf));
-    vector<vector<bool> > visitados(k+1, vector<bool>(V,false));
-	
-	dist[0][src-1] = tuplaCero;
+    vector<vector<pair<int,int> > > dist(k + 1, vector<pair<int,int> >(V, tuplaInf));
+    vector<vector<bool> > visitados(k + 1, vector<bool>(V, false));
+	dist[0][src] = tuplaCero;
 	pair<int,int> elegido;
     
-    for (int count = 0; count < (V*k)-1; count++){
-        elegido = proximoNodo(k,V,dist, visitados);
-        cout<<"elegido: ("<<elegido.first<<","<<elegido.second+1<<")"<<endl;
-        int nivel=elegido.first;
-        int nodo=elegido.second;
+    //DEBUG
+    int c = 0;
+    for (int count = 0; count < (V*k) - 1; count++){
+        if(termine){
+           	break;
+        }
+        elegido = proximoNodo(k, V, dist, visitados);
+        //DEBUG
+        cout << "elegido: (" << elegido.first << "," << elegido.second + 1 << ")" << endl;
+        int nivel = elegido.first;
+        int nodo = elegido.second;
+
+        //DEBUG
+        if(nivel == dist[nivel][nodo].second){
+        	c++;
+        	cout << "Son iguales. C = " << c << endl;
+        }
+
+        int dist_elegido = dist[nivel][nodo].first;
 
         visitados[nivel][nodo] = true;
     
         
-        for (int ik = 0; ik < k+1; ik++){
+        for (int ik = 0; ik < k + 1; ik++){
+            if(termine){
+            	break;
+            }
             for (int v = 0; v < V; v++){
-                if(!visitados[ik][v] && ik==nivel && grafo.conectados(nodo,v) && dist[nivel][nodo].first != INT_MAX && dist[nivel][nodo].first +grafo.peso(nodo,v) < dist[ik][v].first){
-                    pair<int,int>tuplaCamino(dist[nivel][nodo].first + grafo.peso(nodo,v), dist[nivel][nodo].second + grafo.esPremium(nodo,v));
-                    int nuevoNivel=nivel + grafo.esPremium(nodo,v);
-                    if(nuevoNivel<=k){
-                        dist[nuevoNivel][v]=tuplaCamino;
+                if(!visitados[ik][v] && ik == nivel && grafo.conectados(nodo,v) && dist_elegido != INT_MAX && 
+                		dist_elegido + grafo.peso(nodo,v) < dist[ik][v].first){
+                    
+                    pair<int,int> tuplaCamino(dist_elegido + grafo.peso(nodo, v),
+                    	 nivel + grafo.esPremium(nodo,v));
+
+                    int nuevoNivel = nivel + grafo.esPremium(nodo,v);
+                    if(nuevoNivel <= k){
+                        dist[nuevoNivel][v] = tuplaCamino;
                         // cout<<"v: "<<v<<" ,ik: "<<ik<<endl;
-                        cout<<" actualizando a: ("<<nuevoNivel<<","<<v+1<<") con valores: ("<<tuplaCamino.first<<","<<tuplaCamino.second<<")"<<endl;
+                        cout<<" actualizando a: ("<< nuevoNivel <<"," << v + 1 <<") con valores: ("<< tuplaCamino.first<< "," << tuplaCamino.second <<")" << endl;
+                        if(v == dest){
+                        	termine = true;
+                        	break;
+                        }
                     }
                 }
             }
@@ -60,13 +81,15 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
     }
 
     int result = INT_MAX;
-    for(int i=0; i<k+1;i++){
-        if(dist[i][dest-1].first < result){
-            result = dist[i][dest-1].first;
+    for(int i = 0; i < k + 1; i++){
+        if(dist[i][dest].first < result){
+            result = dist[i][dest].first;
         }
     }
-    if(result==INT_MAX)
+
+    if(result == INT_MAX){
         return -1;
+    }
     return result;
 
 }

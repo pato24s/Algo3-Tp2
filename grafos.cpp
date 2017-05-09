@@ -105,39 +105,29 @@ int GrafoConPremium::esPremium(int u, int v){
 //Metodos de DigrafoConPeso
 
 DigrafoConPeso::DigrafoConPeso(int Ve){
-	for (int i = 0; i < Ve; i++){
-		vector<int> fila;
-
-		for(int j = 0 ; j < Ve; j++){
-			fila.push_back(0);
-		}
-		matriz.push_back(fila);
-	}
-	
 	V = Ve;
 	E = 0;
 	
 }
 
 void DigrafoConPeso::agregarEje(int u, int v, int peso){
-	//Si u o v son mas grandes que V, estoy agregando vertices al grafo ademas de aristas. Agrando la matriz
-	if(u > V){
-		matriz.resize(u);
-		for(int i = 0; i < matriz.size(); i++){
-			matriz[i].resize(u);
-		}
-	} else if(v > V){
-		matriz.resize(v);
-		for(int i = 0; i < matriz.size(); i++){
-			matriz[i].resize(v);
-		}
-	}
-	matriz[u][v] = peso;
-	E++;
+	Eje nuevaArista(u, v, peso);
+	aristas.insert(nuevaArista);
+
+	E = aristas.size();
+
 }
 
 int DigrafoConPeso::peso(int u, int v){
 	return matriz[u][v];
+}
+
+set<Eje>::iterator DigrafoConPeso::aristasInicio(){
+	return aristas.begin();
+}
+
+set<Eje>::iterator DigrafoConPeso::aristasFin(){
+	return aristas.end();
 }
 
 //Metodos de GrafoConPeso

@@ -21,4 +21,5 @@ ej2: ej2.o grafos.o metodos.o
 clean: 
 	rm -f $(EJS)
 	rm -f $(OBJS)
+	rm -f *.o
 
