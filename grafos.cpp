@@ -116,7 +116,7 @@ void DigrafoConPeso::agregarEje(int u, int v, int peso){
 	Eje nuevaArista(u, v, peso);
 	aristas.insert(nuevaArista);
 
-	// E = aristas.size();
+	E = aristas.size();
 
 }
 

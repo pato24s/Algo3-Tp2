@@ -5,7 +5,7 @@ EJS = ej1 ej2 ej3
 DEPS =  grafos.h metodos.h
 OBJS = grafos.o metodos.o
 
-all: ej1 ej3
+all: ej1 ej2 ej3
 
 ej1: ej1.o grafos.o metodos.o
 	$(CC) $(CFLAGS) -o $@ $^

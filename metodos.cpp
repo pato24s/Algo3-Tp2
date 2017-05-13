@@ -151,10 +151,10 @@ void printArr(int dist[], int n)
 //BellmanFord robado, dada una ciudad source(src) calcula las distancias minimas entre source y el resto
 //Tambien calcula la distancia entre source y source que es lo que necesitamos
 // le agregue un k que es cuanto vamos a restarle a todos los peajes
-bool BellmanFord(struct Graph* graph, int k)
+bool BellmanFord(DigrafoConPeso g, int k)
 {
-    int V = graph->V;
-    int E = graph->E;
+    int V = g.dameV();
+    int E = g.dameE();
     int dist[V];
  
     // Step 1: Initialize distances from src to all other vertices
@@ -168,11 +168,11 @@ bool BellmanFord(struct Graph* graph, int k)
     // edges
     for (int i = 1; i <= V-1; i++)
     {
-        for (int j = 0; j < E; j++)
+        for (std::set<Eje>::iterator it=g.aristasInicio(); it!=g.aristasFin(); ++it)
         {
-            int u = graph->edge[j].src;
-            int v = graph->edge[j].dest;
-            int weight = graph->edge[j].weight-k;
+            int u = (*it).dameU();
+            int v = (*it).dameV();
+            int weight = (*it).damePeso()-k;
             if (dist[u] != INT_MAX && dist[u] + weight < dist[v])
                 dist[v] = dist[u] + weight;
         }
@@ -184,11 +184,11 @@ bool BellmanFord(struct Graph* graph, int k)
     // is a cycle.
 
     //Esta parte es lo que necesitamos en el punto 2!
-    for (int i = 0; i < E; i++)
+    for (std::set<Eje>::iterator it=g.aristasInicio(); it!=g.aristasFin(); ++it)
     {
-        int u = graph->edge[i].src;
-        int v = graph->edge[i].dest;
-        int weight = graph->edge[i].weight-k;
+        int u = (*it).dameU();
+        int v = (*it).dameV();
+        int weight = (*it).damePeso()-k;
         if (dist[u] != INT_MAX && dist[u] + weight < dist[v])
             return true;
     }
@@ -197,7 +197,9 @@ bool BellmanFord(struct Graph* graph, int k)
     return false;
 }
  
-int ejercicio2(struct Graph* graph, int maxPeaje){
+
+
+int ejercicio2(DigrafoConPeso g, int maxPeaje){
     int reduccion;
     
     bool perdemosPlata;
@@ -207,7 +209,7 @@ int ejercicio2(struct Graph* graph, int maxPeaje){
     while(init<=fin){ //log(maxPeaje)
         reduccion=mid;
         
-        perdemosPlata=BellmanFord(graph,reduccion);//creo que bellmanFord es n*m
+        perdemosPlata=BellmanFord(g,reduccion);//creo que bellmanFord es n*m
 
         if(perdemosPlata){
         //si perdemos plata solucion esta entre init y mid (hay que reducir menos el precio)
@@ -221,7 +223,6 @@ int ejercicio2(struct Graph* graph, int maxPeaje){
 
     }  
     return reduccion;
-//me queda entonces O(n*m*log) ?
 }
 
 /* ------------------ Ejer 3 ------------------ */

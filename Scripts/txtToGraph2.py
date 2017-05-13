@@ -12,7 +12,7 @@ G=nx.DiGraph()
 linea0 = raw_input().split(' ')
 nodos = int(linea0[0])
 ejes = int(linea0[1])
-G.add_nodes_from([0,nodos-1])
+G.add_nodes_from([1,nodos])
 
 i = 0
 while(i < ejes):
@@ -26,9 +26,9 @@ while(i < ejes):
 
 
 edges = G.edges()
-pos=nx.circular_layout(G)
-nx.draw_circular(G,with_labels=True )
+pos=nx.spring_layout(G)
+# nx.draw(G,with_labels=True )
 labels = nx.get_edge_attributes(G,'weight')
-nx.draw_networkx_edge_labels(G,pos,edge_labels=labels,arrows=True)
-nx.draw(G, pos, edges=edges)
+nx.draw_networkx_edge_labels(G,pos,edge_labels=labels)
+nx.draw(G,pos,with_labels=True,node_size=300, edges=edges)
 plt.savefig("grafo_ejer2.png")

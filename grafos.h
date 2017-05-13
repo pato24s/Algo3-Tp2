@@ -11,10 +11,10 @@ class Eje{
 		Eje(int n1, int n2): u(n1), v(n2), peso(0), premium(-1) {}
 		
 		//Getters
-		int dameU() {return u;}
-		int dameV() {return v;}
-		int damePeso() {return peso;}
-		int damePremium() {return premium;}
+		int dameU() const {return u;}
+		int dameV() const {return v;}
+		int damePeso() const {return peso;}
+		int damePremium() const {return premium;}
 
 		//Setters
 		int setU(int nodo) {u = nodo;}
@@ -23,8 +23,9 @@ class Eje{
 		int setPremium(int prem) {premium = prem;}
 
 		bool operator<(const Eje& ej) const{
-   			return peso < ej.peso;  //assume that you compare the record based on a
+   			return peso < ej.peso || u < ej.u || v < ej.v;  //assume that you compare the record based on a
 		}
+
 
 
 	private:
@@ -118,6 +119,11 @@ class DigrafoConPeso : public Grafo{
 
 		//Devuelve un iterador al final de la lista de aristas. Puede modificar elementos.
 		set<Eje>::iterator aristasFin();
+
+				//Getters
+		int dameV() {return V;}
+		int dameE() {return E;}
+
 
 
 	private:
