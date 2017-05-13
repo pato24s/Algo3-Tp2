@@ -26,6 +26,7 @@ class Eje{
    			return peso < ej.peso || u < ej.u || v < ej.v;  //assume that you compare the record based on a
 		}
 
+		
 
 
 	private:
@@ -137,6 +138,11 @@ class DigrafoConPeso : public Grafo{
 class GrafoConPeso : public Grafo{
 	public:
 		//Crea un grafo vacio
+		struct pesoComp {
+	
+			  bool operator() (const Eje& lhs, const Eje& rhs) const
+			  {return lhs.damePeso()<rhs.damePeso();}
+			};
 		GrafoConPeso() {};
 		
 		//Crea un grafo con Ve vertices disconexos
@@ -150,11 +156,19 @@ class GrafoConPeso : public Grafo{
 		//Requiere que conectados(u, v) sea true. Devuelve el peso de la conexion entre u y v. 
 		int peso(int u, int v);
 
+		//Devuelve un iterador al inicio de la lista de aristas. Puede modificar elementos.
+		set<Eje,pesoComp>::iterator aristasInicio();
+
+		//Devuelve un iterador al final de la lista de aristas. Puede modificar elementos.
+		set<Eje,pesoComp>::iterator aristasFin();
+
 		//Getters
 		int dameV() {return V;}
 		int dameE() {return E;}
 
 	private:
+
+		set<Eje,pesoComp> aristas;
 		int V;
 		int E;
 

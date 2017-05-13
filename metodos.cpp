@@ -226,8 +226,16 @@ int ejercicio2(DigrafoConPeso g, int maxPeaje){
 }
 
 /* ------------------ Ejer 3 ------------------ */
-int ejercicio3(GrafoConPeso &grafo){
+int ejercicio3(GrafoConPeso &g){
+    //Kruskal modificado
     
-    // return V;
+    for (std::set<Eje>::iterator it=g.aristasInicio(); it!=g.aristasFin(); ++it)
+    {
+        int u = (*it).dameU();
+        int v = (*it).dameV();
+        int weight = (*it).damePeso();
+        cout<<"("<<u<<","<<v<<") p: "<<weight<<endl;
+    }
+    return 1;
 
 }

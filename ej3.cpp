@@ -10,7 +10,7 @@ int main(){
         cin >> V;	//proceso la primer linea
         if(V == -1)		//si es la linea del -1 -1 termino
             break;
-        cout<<V<<endl;
+        // cout<<V<<endl;
         GrafoConPeso grafo(V);
         int c1;
         int c2;
