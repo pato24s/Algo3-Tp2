@@ -223,3 +223,10 @@ int ejercicio2(struct Graph* graph, int maxPeaje){
     return reduccion;
 //me queda entonces O(n*m*log) ?
 }
+
+/* ------------------ Ejer 3 ------------------ */
+int ejercicio3(GrafoConPeso &grafo){
+    
+    // return V;
+
+}

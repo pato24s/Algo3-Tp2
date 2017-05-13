@@ -1,13 +1,14 @@
 #include <vector>
+#include <set>
 
 using namespace std;
 
 class Eje{
 	public:
 		//Varios constructores para distintos tipos de ejes (con o sin peso, premium o no premium)
-		eje(int n1, int n2, int p, int prem): u(n1), v(n2), peso(p), premium(prem) {} //No se usa
-		eje(int n1, int n2, int p): u(n1), v(n2), peso(p), premium(-1) {}
-		eje(int n1, int n2): u(n1), v(n2), peso(0), premium(-1) {}
+		Eje(int n1, int n2, int p, int prem): u(n1), v(n2), peso(p), premium(prem) {} //No se usa
+		Eje(int n1, int n2, int p): u(n1), v(n2), peso(p), premium(-1) {}
+		Eje(int n1, int n2): u(n1), v(n2), peso(0), premium(-1) {}
 		
 		//Getters
 		int dameU() {return u;}
@@ -21,12 +22,19 @@ class Eje{
 		int setPeso(int p) {peso = p;}
 		int setPremium(int prem) {premium = prem;}
 
+		bool operator<(const Eje& ej) const{
+   			return peso < ej.peso;  //assume that you compare the record based on a
+		}
+
+
 	private:
 
 		int u;
 		int v;
 		int peso;
 		int premium;
+
+
 };
 
 class Grafo{
@@ -135,6 +143,10 @@ class GrafoConPeso : public Grafo{
 
 		//Requiere que conectados(u, v) sea true. Devuelve el peso de la conexion entre u y v. 
 		int peso(int u, int v);
+
+		//Getters
+		int dameV() {return V;}
+		int dameE() {return E;}
 
 	private:
 		int V;
