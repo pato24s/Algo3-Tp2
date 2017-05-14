@@ -226,9 +226,51 @@ int ejercicio2(DigrafoConPeso g, int maxPeaje){
 }
 
 /* ------------------ Ejer 3 ------------------ */
+
+int altura[1000000];
+int padre[1000000];
+
+
+
+void kruskal_init(int n) {
+    for (int i = 1; i < n; ++i){
+              altura[i]=1;
+              padre[i] = i;
+        }    
+
+}
+
+int kruskal_find(int x) {
+    if(padre[x] != x){
+        padre[x] = kruskal_find(padre[x]);
+    }
+    return padre[x];
+}
+
+void kruskal_uni(int x, int y) {
+    x = kruskal_find(x);
+    y = kruskal_find(y);
+    if(altura[x] < altura[y]){
+        padre[x] = y;
+    }else{
+        padre[y] = x;
+    }
+
+    if(altura[x]==altura[y]){
+        altura[x] = altura[x]+1;
+    }
+}
+
+
+
 int ejercicio3(GrafoConPeso &g){
     //Kruskal modificado
-    
+    int costo = 0;
+    int Ve = g.dameV();
+
+
+    //para debugear
+    cout<<"lista de aristas: "<<endl;
     for (std::set<Eje>::iterator it=g.aristasInicio(); it!=g.aristasFin(); ++it)
     {
         int u = (*it).dameU();
@@ -236,6 +278,40 @@ int ejercicio3(GrafoConPeso &g){
         int weight = (*it).damePeso();
         cout<<"("<<u<<","<<v<<") p: "<<weight<<endl;
     }
-    return 1;
+    
+    vector<pair<int,int> > solucion_ejes;
+    kruskal_init(Ve);
+
+    std:set<Eje>::iterator iter = g.aristasInicio();
+    for (int j = 0; j < g.dameE(); ++j){
+        int eje_u = (*iter).dameU();
+        int eje_v = (*iter).dameV();
+        int eje_p = (*iter).damePeso();
+
+        if(kruskal_find(eje_u) != kruskal_find(eje_v)){
+            cout<<"sirve eje: ("<<eje_u<<" "<<eje_v<<")"<<endl;
+            //Agrego el eje a la solucion
+            pair<int,int> ejeValido(eje_u,eje_v);
+            solucion_ejes.push_back(ejeValido);
+            
+            //Si el peso era negativo no agrego el costo (ya la tengo construida)
+            if(eje_p>0){
+                costo += eje_p;
+            }
+
+            //Uno las componentes
+            kruskal_uni(eje_u,eje_v);
+
+
+        }else{
+            //no sirve la arista, si estaba construida tengo que agregar costo de destruccion
+            if(eje_p<0){
+                costo += (eje_p)*(-1);
+            }
+        }
+        iter++;
+
+    }
+    return costo;
 
 }
