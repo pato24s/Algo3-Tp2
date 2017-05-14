@@ -4,14 +4,14 @@ using namespace std;
 
 /* ------------------ Ejer 1 ------------------ */
 
-pair<int,int> proximoNodo(int filas, int cols, vector<vector<pair<int,int> > > &dist, vector<vector<bool> > &visitados){
+pair<int,int> proximoNodo(int filas, int cols, vector<vector<pair<int, int> > > &dist, vector<vector<bool> > &visitados){
 	int min = INT_MAX;
-    pair<int,int> min_ij;
+    pair<int, int> min_ij;
 
     for (int i = 0; i < filas + 1; i++){
         for (int j = 0; j < cols; j++){
             if(visitados[i][j] == false && dist[i][j].first <= min){
-            	pair<int,int> indices(i,j);
+            	pair<int, int> indices(i,j);
                 min = dist[i][j].first;
                 min_ij = indices;
             }    
@@ -26,7 +26,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
 
 	pair<int, int> tuplaCero(0, 0);
     pair<int, int> tuplaInf(INT_MAX, 0);
-    vector<vector<pair<int,int> > > dist(k + 1, vector<pair<int,int> >(V, tuplaInf));
+    vector<vector<pair<int, int> > > dist(k + 1, vector<pair<int, int> >(V, tuplaInf));
     vector<vector<bool> > visitados(k + 1, vector<bool>(V, false));
 	dist[0][src] = tuplaCero;
 	pair<int,int> elegido;
@@ -62,7 +62,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
                 if(!visitados[ik][v] && ik == nivel && grafo.conectados(nodo,v) && dist_elegido != INT_MAX && 
                 		dist_elegido + grafo.peso(nodo,v) < dist[ik][v].first){
                     
-                    pair<int,int> tuplaCamino(dist_elegido + grafo.peso(nodo, v),
+                    pair<int, int> tuplaCamino(dist_elegido + grafo.peso(nodo, v),
                     	 nivel + grafo.esPremium(nodo,v));
 
                     int nuevoNivel = nivel + grafo.esPremium(nodo,v);
