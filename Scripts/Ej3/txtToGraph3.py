@@ -5,6 +5,7 @@ import math
 import random
 import networkx as nx
 import matplotlib.pyplot as plt
+from networkx.drawing.nx_agraph import graphviz_layout
 
 
 G=nx.Graph()
@@ -24,15 +25,17 @@ while(i < ((nodos*(nodos-1))/2)):
 	existe = int(lineaEje_i[2])
 	wt = int(lineaEje_i[3])
 	color = 'k'
-	if existe ==1:
+	if existe == 1:
 		color = 'b'
 	G.add_edge(c1, c2,color=color, weight=wt )
-	i+=1
+	i += 1
 
 
 edges = G.edges()
 colors = [G[u][v]['color'] for u,v in edges]
-# pos=nx.circular_layout(G)
-# nx.draw_circular(G,with_labels=True )
-nx.drawing.nx_agraph.graphviz_layout(G)
+pos = nx.spectral_layout(G)
+nx.draw_spectral(G, with_labels = True )
+labels = nx.get_edge_attributes(G,'weight')
+nx.draw_networkx_edge_labels(G, pos, edge_color = colors, edge_labels = labels)
+nx.draw(G, pos, edges=edges, edge_color=colors)
 plt.savefig("grafoEjer3.png")

@@ -107,9 +107,6 @@ int GrafoConPremium::esPremium(int u, int v){
 DigrafoConPeso::DigrafoConPeso(int Ve){
 	V = Ve;
 	E = 0;
-	set<Eje> aris;
-	aristas = aris;
-	
 }
 
 void DigrafoConPeso::agregarEje(int u, int v, int peso){
@@ -137,9 +134,6 @@ set<Eje>::iterator DigrafoConPeso::aristasFin(){
 GrafoConPeso::GrafoConPeso(int Ve){
 	V = Ve;
 	E = 0;
-	set<Eje,pesoComp> aris;
-	aristas = aris;
-	
 }
 
 void GrafoConPeso::agregarEje(int u, int v, int peso){

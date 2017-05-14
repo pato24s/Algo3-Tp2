@@ -4,16 +4,17 @@ using namespace std;
 
 
 // Driver program to test above functions
-int main()
-{   int j = 0;
+int main(){
+    cout << "Procesando instancias del ejercicio 2" << endl;
+    int j = 0;
     while(1){
         int V;
         int E;
-        cin >> V >> E;//proceso la primer linea
+        cin >> V >> E;  //Proceso la primera linea
 
-        if(V == -1)//si es la linea del -1 -1 chau
+        if(V == -1){     //Si es la linea del -1 -1 chau
             break;
-
+        }
         DigrafoConPeso grafo(V); //Creo digrafo con V vertices
         int c1;
         int c2;
@@ -26,7 +27,7 @@ int main()
                 maxPeaje = p;
             grafo.agregarEje(c1, c2, p);
         }
-        cout<< "Solucion de la entrada " << j << ": " << ejercicio2(grafo, maxPeaje) << endl;
+        cout<< "Solucion de la instancia " << j << ": " << ejercicio2(grafo, maxPeaje) << endl;
         j++;
     }
 

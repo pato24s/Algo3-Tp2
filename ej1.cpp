@@ -3,14 +3,15 @@
 using namespace std;
 
 int main(){   
-    // cout << "Ejercicio 1!" << endl;
+    cout << "Procesando instancias del ejercicio 1" << endl;
     int j = 0;
     while(1){
         int V;
         int E;
-        cin >> V >> E;	//proceso la primer linea
-        if(V == -1)		//si es la linea del -1 -1 termino
+        cin >> V >> E;	//Proceso la primera linea
+        if(V == -1){	//Si es la linea del -1 -1 termino
             break;
+        }		
         int src;
         int dst;
         int k;
@@ -28,20 +29,6 @@ int main(){
           	grafo.agregarEje(c1 - 1 , c2 - 1, peso, premium);
         }
 
-        // for (int i = 0; i < V; ++i)
-        // {
-        // 	for (int j = 0; j < V; ++j)
-        // 	{
-        // 		cout << "(" << grafo.peso(i, j) << "," << grafo.esPremium(i, j) <<")";
-        // 		if(j != V - 1){
-        // 			cout << ", ";
-        // 		}
-        // 	}
-        // 	cout << endl;
-        // }
-        // cout << endl;
-        // cout<<grafo.E<<endl;
-        // cout<<"src: "<<src<<" dst: "<<dst<<" k: "<<k<<endl;
         //Se resta 1 a src y dst porque indexamos desde 0
         cout<<"Solucion de la instancia " << j << ": "<< ejercicio1(grafo, src - 1, dst - 1, k) << endl;
         j++;

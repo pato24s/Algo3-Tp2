@@ -18,9 +18,9 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k);
 
 /* ------------------ Ejer 2 ------------------------------------- */
 
-bool BellmanFord(DigrafoConPeso graph, int k);
+bool BellmanFord(DigrafoConPeso &grafo, int k);
 
-int ejercicio2(DigrafoConPeso graph, int maxPeaje);
+int ejercicio2(DigrafoConPeso &grafo, int maxPeaje);
 
 /* ------------------ Ejer 3 ------------------------------------- */
 
