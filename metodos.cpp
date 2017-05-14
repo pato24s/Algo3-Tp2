@@ -312,6 +312,7 @@ int ejercicio3(GrafoConPeso &g){
         iter++;
 
     }
+    cout<<costo<<" "<<solucion_ejes.size()<<endl;
     return costo;
 
 }
