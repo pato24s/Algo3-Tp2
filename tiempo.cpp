@@ -51,8 +51,8 @@ int main(int argc, char* argv[]){
 		
     		    //Se resta 1 a src y dst porque indexamos desde 0
     		    auto start = ya();
-				int sol = ejercicio1(grafo, src - 1, dst - 1, k);
-				auto stop = ya();
+				    int sol = ejercicio1(grafo, src - 1, dst - 1, k);
+				    auto stop = ya();
     		    cout << j + 1 << ";"<< V << ";" << E << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
     		    j++;
     		}
@@ -81,8 +81,8 @@ int main(int argc, char* argv[]){
    			        grafo.agregarEje(c1, c2, p);
    			    }
    			    auto start = ya();
-				int sol = ejercicio2(grafo, maxPeaje);
-				auto stop = ya();
+				  int sol = ejercicio2(grafo, maxPeaje);
+				  auto stop = ya();
    			    cout << j + 1 << ";"<< V << ";" << E << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
    			    j++;
    			}
@@ -114,8 +114,8 @@ int main(int argc, char* argv[]){
 		
    			    //Se resta 1 a src y dst porque indexamos desde 0
    			    auto start = ya();
-				int sol = ejercicio3(grafo);
-				auto stop = ya();
+				    int sol = ejercicio3(grafo);
+				    auto stop = ya();
    			    cout << j + 1 << ";"<< V << ";" << E << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
    			    j++;
    			 }

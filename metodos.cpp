@@ -257,6 +257,7 @@ int ejercicio3(GrafoConPeso &g){
         iter++;
 
     }
+    //Agregar flag
     cout << costo << " " << solucion_ejes.size() << endl;
     return costo;
 }
