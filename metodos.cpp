@@ -33,6 +33,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
     
     //DEBUG
     int c = 0;
+    cout << "El origen es " << src + 1 << " y el destino es " << dest + 1 << endl; 
     for (int count = 0; count < (V*k) - 1; count++){
         if(termine){
            	break;
@@ -69,7 +70,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
                     if(nuevoNivel <= k){
                         dist[nuevoNivel][v] = tuplaCamino;
                         // cout<<"v: "<<v<<" ,ik: "<<ik<<endl;
-                        cout<<" actualizando a: ("<< nuevoNivel <<"," << v + 1 <<") con valores: ("<< tuplaCamino.first << "," << tuplaCamino.second <<")" << endl;
+                        cout<<" actualizando a: (" << nuevoNivel << "," << v + 1 << ") con valores: (" << tuplaCamino.first << "," << tuplaCamino.second <<")" << endl;
                         if(v == dest){
                         	termine = true;
                         	break;
