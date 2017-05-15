@@ -27,3 +27,11 @@ Changelog
 		- En proximoNodo, ahora el par indices se crea solo si se cumple la condicion. Se estaban creando muchos pares inutiles.
 		- Optimizacion para terminar de actualizar nodos si ya actualice el nodo destino.
 		- El main del ejer1 le pasa src y dest con un -1, por temas de indexacion (no se porque lo cambiaron).
+
+15/5/17
+	
+	- Fix al Ejercicio 1
+	- Nuevo tiempos.cpp para calcular los tiempos de cada ejercicio e imprimirlos por pantalla en formato .csv
+	- Modificado random_ejer1.py para crear instancias con n fijo y m, k variables
+	- Nueva carpeta Outputs para los scripts
+	- Ejer 3 mas testado, parece funcionar.

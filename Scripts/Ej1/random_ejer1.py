@@ -1,61 +1,45 @@
 #!/usr/bin/python
 
+#python random_ejer1.py tam_entradas cant_entradas > out.txt
+#Crea cant_entradas de tam tam_entradas y las guarda en out.txt
+
 import sys
 import math
 import random
-import networkx as nx
-import matplotlib.pyplot as plt
-
-
-G=nx.Graph()
-
 
 nodos = int(sys.argv[1])
-ejes = int(sys.argv[2])
-G.add_nodes_from([0,nodos-1])
+cant_entradas = int(sys.argv[2])
 
-Matrix = [[0 for x in range(nodos)] for y in range(nodos)] 
+for c in range(0, cant_entradas):
+	ejes = int(random.uniform(0, nodos * (nodos - 1) / 2) + 1)	#Puede desde no tener aristas a ser completo
 
-
-
-
-
-print str(nodos) + " " + str(ejes)
-
-src = int(random.uniform(0,nodos))
-dst = int(random.uniform(0,nodos))
-while dst == src:
-	dst = int(random.uniform(0,nodos))
-
-k = int(random.uniform(0,ejes/2))
-print str(src)+" "+str(dst)+" "+str(k)
-
-i = 0
-while(i < ejes):
-	c1 = int(random.uniform(0,nodos))
-	c2 = int(random.uniform(0,nodos))
-	while c2 == c1:
-		c2 = int(random.uniform(0,nodos))
-	premium = int(random.uniform(0,2))
-	peso = int(random.uniform(0,30))
+	Matrix = [[0 for x in range(nodos)] for y in range(nodos)] 
 
 
-	if Matrix[c1][c2] == 0:
-		color = 'k'
-		if premium ==1:
-			color = 'b'
-		G.add_edge(c1, c2,color=color, weight=peso )
-		Matrix[c1][c2]=1
-		Matrix[c2][c1]=1
-		print str(c1) + " " +str(c2)+" "+ str(premium) + " " + str(peso)
-		i+=1
+	print str(nodos) + " " + str(ejes)
+
+	src = int(random.uniform(1, nodos + 1))
+	dst = int(random.uniform(1, nodos + 1))
+	#Me aseguro de que dst != src
+	while dst == src:
+		dst = int(random.uniform(1, nodos + 1))
+
+	k = int(random.uniform(0,ejes / 2 + 1))
+	print str(src) + " " + str(dst) + " " + str(k)
+
+	i = 0
+	while(i < ejes):
+		c1 = int(random.uniform(1, nodos + 1))
+		c2 = int(random.uniform(1, nodos + 1))
+		while c2 == c1:
+			c2 = int(random.uniform(1, nodos + 1))
+		premium = int(random.uniform(0, 2))
+		peso = int(random.uniform(0, 51))	#Peso entre 0 y 50 incluido
 
 
-edges = G.edges()
-colors = [G[u][v]['color'] for u,v in edges]
-pos=nx.circular_layout(G)
-nx.draw_circular(G,with_labels=True )
-labels = nx.get_edge_attributes(G,'weight')
-nx.draw_networkx_edge_labels(G,pos,edge_color=colors,edge_labels=labels)
-nx.draw(G, pos, edges=edges, edge_color=colors)
-plt.savefig("../../Outputs/Ej1/grafoRandEjer1.png")
+		if Matrix[c1 - 1][c2 - 1] == 0:
+			Matrix[c1 - 1][c2 - 1] = 1
+			Matrix[c2 - 1][c1 - 1] = 1
+			print str(c1) + " " + str(c2) + " " + str(premium) + " " + str(peso)
+			i += 1
+print "-1 -1"
