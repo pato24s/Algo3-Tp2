@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#El grafico no se ve bien para algunas configuraciones o muchos vertices.
 
 import sys
 import math
@@ -28,7 +29,7 @@ while(i < ejes):
 	wt = int(lineaEje_i[3])
 	color = 'k'
 	if pm ==1:
-		color = 'b'
+		color = 'g'
 	G.add_edge(c1, c2,color=color, weight=wt )
 	i+=1
 
@@ -40,4 +41,4 @@ nx.draw_circular(G,with_labels=True )
 labels = nx.get_edge_attributes(G,'weight')
 nx.draw_networkx_edge_labels(G,pos,edge_color=colors,edge_labels=labels)
 nx.draw(G, pos, edges=edges, edge_color=colors)
-plt.savefig("grafo.png")
+plt.savefig("../../Outputs/Ej1/grafoEjer1.png")

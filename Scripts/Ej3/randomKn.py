@@ -17,7 +17,7 @@ while(u <= n):
 	v = u+1
 	while(v <= n):
 		esta = int(random.uniform(0,2))
-		peso = int(random.uniform(-200,200))
+		peso = int(random.uniform(0,300))
 		target.write(str(u) + " " + str(v) + " " + str(esta) + " " + str(peso)+"\n")
 		v+=1
 	u+=1 

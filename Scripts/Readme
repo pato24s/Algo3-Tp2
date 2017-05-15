@@ -1,3 +1,6 @@
+Los scripts guardan los outputs en la carpeta "Outputs", salvo los que generan entradas, como randomK, que guardan en la carpeta Inputs.
+
+
 random_ejer1:
 	python random_ejer1.py n m > salida_texto
 

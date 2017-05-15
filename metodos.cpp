@@ -69,7 +69,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
                     if(nuevoNivel <= k){
                         dist[nuevoNivel][v] = tuplaCamino;
                         // cout<<"v: "<<v<<" ,ik: "<<ik<<endl;
-                        cout<<" actualizando a: ("<< nuevoNivel <<"," << v + 1 <<") con valores: ("<< tuplaCamino.first<< "," << tuplaCamino.second <<")" << endl;
+                        cout<<" actualizando a: ("<< nuevoNivel <<"," << v + 1 <<") con valores: ("<< tuplaCamino.first << "," << tuplaCamino.second <<")" << endl;
                         if(v == dest){
                         	termine = true;
                         	break;
@@ -206,21 +206,18 @@ void kruskal_uni(int x, int y) {
 }
 
 
-
+//Kruskal modificado
 int ejercicio3(GrafoConPeso &g){
-    //Kruskal modificado
     int costo = 0;
     int Ve = g.dameV();
 
-
     //DEBUG
     cout << "lista de aristas: " << endl;
-    for (std::set<Eje>::iterator it = g.aristasInicio(); it != g.aristasFin(); ++it)
-    {
+    for (std::set<Eje>::iterator it = g.aristasInicio(); it != g.aristasFin(); ++it){
         int u = (*it).dameU();
         int v = (*it).dameV();
         int weight = (*it).damePeso();
-        cout << "(" << u << "," << v << ") p: " << weight << endl;
+        cout << "(" << u + 1 << "," << v + 1 << ") p: " << weight << endl;
     }
     
     vector<pair<int, int> > solucion_ejes;
@@ -234,7 +231,7 @@ int ejercicio3(GrafoConPeso &g){
         int eje_p = (*iter).damePeso();
 
         if(kruskal_find(eje_u) != kruskal_find(eje_v)){
-            cout << "sirve eje: (" << eje_u << " " << eje_v << ")" << endl;
+            cout << "sirve eje: (" << eje_u + 1 << " " << eje_v + 1 << ")" << endl;
             //Agrego el eje a la solucion
             pair<int,int> ejeValido(eje_u, eje_v);
             solucion_ejes.push_back(ejeValido);

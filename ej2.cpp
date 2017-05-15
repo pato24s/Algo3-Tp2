@@ -27,7 +27,7 @@ int main(){
                 maxPeaje = p;
             grafo.agregarEje(c1, c2, p);
         }
-        cout<< "Solucion de la instancia " << j << ": " << ejercicio2(grafo, maxPeaje) << endl;
+        cout<< "Solucion de la instancia " << j + 1 << ": " << ejercicio2(grafo, maxPeaje) << endl;
         j++;
     }
 

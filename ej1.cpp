@@ -30,7 +30,7 @@ int main(){
         }
 
         //Se resta 1 a src y dst porque indexamos desde 0
-        cout<<"Solucion de la instancia " << j << ": "<< ejercicio1(grafo, src - 1, dst - 1, k) << endl;
+        cout<<"Solucion de la instancia " << j + 1 << ": "<< ejercicio1(grafo, src - 1, dst - 1, k) << endl;
         j++;
     }
 

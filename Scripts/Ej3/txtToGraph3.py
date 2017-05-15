@@ -26,7 +26,7 @@ while(i < ((nodos*(nodos-1))/2)):
 	wt = int(lineaEje_i[3])
 	color = 'k'
 	if existe == 1:
-		color = 'b'
+		color = 'g'
 	G.add_edge(c1, c2,color=color, weight=wt )
 	i += 1
 
@@ -38,4 +38,4 @@ nx.draw_spectral(G, with_labels = True )
 labels = nx.get_edge_attributes(G,'weight')
 nx.draw_networkx_edge_labels(G, pos, edge_color = colors, edge_labels = labels)
 nx.draw(G, pos, edges=edges, edge_color=colors)
-plt.savefig("grafoEjer3.png")
+plt.savefig("../../Outputs/Ej3/grafoEjer3.png")
