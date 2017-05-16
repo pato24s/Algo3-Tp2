@@ -33,21 +33,21 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
     
     //DEBUG
     int c = 0;
-    cout << "El origen es " << src + 1 << " y el destino es " << dest + 1 << endl; 
+    // cout << "El origen es " << src + 1 << " y el destino es " << dest + 1 << endl; 
     for (int count = 0; count < (V*(k + 1)) - 1; count++){
         if(termine){
            	break;
         }
         elegido = proximoNodo(k, V, dist, visitados);
         //DEBUG
-        cout << "elegido: (" << elegido.first << "," << elegido.second + 1 << ")" << endl;
+        // cout << "elegido: (" << elegido.first << "," << elegido.second + 1 << ")" << endl;
         int nivel = elegido.first;
         int nodo = elegido.second;
 
         //DEBUG
         if(nivel == dist[nivel][nodo].second){
         	c++;
-        	cout << "Son iguales. C = " << c << endl;
+        	// cout << "Son iguales. C = " << c << endl;
         }
 
         int dist_elegido = dist[nivel][nodo].first;
@@ -70,7 +70,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
                     if(nuevoNivel <= k){
                         dist[nuevoNivel][v] = tuplaCamino;
                         // cout<<"v: "<<v<<" ,ik: "<<ik<<endl;
-                        cout<<" actualizando a: (" << nuevoNivel << "," << v + 1 << ") con valores: (" << tuplaCamino.first << "," << tuplaCamino.second <<")" << endl;
+                        // cout<<" actualizando a: (" << nuevoNivel << "," << v + 1 << ") con valores: (" << tuplaCamino.first << "," << tuplaCamino.second <<")" << endl;
                         if(v == dest){
                         	
                             termine = true;
@@ -80,7 +80,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
                 }
             }
         }
-        cout << " Count = " << count << endl;
+        // cout << " Count = " << count << endl;
     }
 
     int result = INT_MAX;

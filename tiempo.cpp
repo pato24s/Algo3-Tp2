@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include "metodos.h"
-
+#include <iostream>
 
 #define ya chrono::high_resolution_clock::now
 
@@ -16,38 +16,37 @@ using namespace std;
 
 
 int main(int argc, char* argv[]){
-	
-	int ejer = atoi(argv[2]);
+  int ejer = atoi(argv[1]);
 
-	//Imprimo header
-	cout << "Instancia;V;E;Tiempo;" << endl;
-	
-	switch(ejer){
-		case 1:
-			int j = 0;
+  //Imprimo header
+  cout << "Instancia;V;E;Tiempo;" << endl;
+  
+  switch(ejer){
+    case 1:{
+      int j = 0;
     		while(1){
-    		    int V;
-    		    int E;
-    		    cin >> V >> E;	//Proceso la primera linea
-    		    if(V == -1){	//Si es la linea del -1 -1 termino
-    		        break;
-    		    }		
-    		    int src;
-    		    int dst;
-    		    int k;
-    		    cin >> src >> dst >> k;
-		
-    		    GrafoConPremium grafo(V);
-    		    int c1;
-    		    int c2;
-    		    bool premium;
-    		    int peso;
-    		    for (int i = 0; i < E; ++i)
-    		    {
-    		        cin >> c1 >> c2 >> premium >> peso;
-    		      	//Se resta 1 a c1 y c2 porque indexamos desde 0
-    		      	grafo.agregarEje(c1 - 1 , c2 - 1, peso, premium);
-    		    }
+            int V;
+            int E;
+            cin >> V >> E;  //Proceso la primera linea
+            if(V == -1){  //Si es la linea del -1 -1 termino
+                break;
+            }   
+            int src;
+            int dst;
+            int k;
+            cin >> src >> dst >> k;
+    
+            GrafoConPremium grafo(V);
+            int c1;
+            int c2;
+            bool premium;
+            int peso;
+            for (int i = 0; i < E; ++i)
+            {
+                cin >> c1 >> c2 >> premium >> peso;
+                //Se resta 1 a c1 y c2 porque indexamos desde 0
+                grafo.agregarEje(c1 - 1 , c2 - 1, peso, premium);
+            }
 		
     		    //Se resta 1 a src y dst porque indexamos desde 0
     		    auto start = ya();
@@ -56,14 +55,15 @@ int main(int argc, char* argv[]){
     		    cout << j + 1 << ";"<< V << ";" << E << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
     		    j++;
     		}
-    		break;
+        break;
+    	}
 
-    	case 2:
-   			int j = 0;
-   			while(1){
-   			    int V;
-   			    int E;
-   			    cin >> V >> E;  //Proceso la primera linea
+    case 2:{
+   		int j = 0;
+  		while(1){
+  		    int V;
+  		    int E;
+  		    cin >> V >> E;  //Proceso la primera linea
 
    			    if(V == -1){     //Si es la linea del -1 -1 chau
    			        break;
@@ -86,9 +86,9 @@ int main(int argc, char* argv[]){
    			    cout << j + 1 << ";"<< V << ";" << E << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
    			    j++;
    			}
-   			break;
-
-   		case 3:
+        break;
+   		}
+   		case 3:{
    			int j = 0;
    			while(1){
    			    int V;
@@ -119,7 +119,8 @@ int main(int argc, char* argv[]){
    			    cout << j + 1 << ";"<< V << ";" << E << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
    			    j++;
    			 }
-   			 break;
+         break;
+   			}
    		default:
    			cout << "Error. Ejercicio desconocido. Opciones: 1, 2 o 3." << endl;
 	}
