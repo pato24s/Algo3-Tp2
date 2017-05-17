@@ -19,12 +19,12 @@ int main(int argc, char* argv[]){
 	int ejer = atoi(argv[1]);
 
 	//Imprimo header
-	cout << "Instancia;V;E;Tiempo;" << endl;
 	int j = 0;
 	int V;
 	int E;
 	switch(ejer){
   		case 1:
+			cout << "Instancia;V;E;K;Tiempo;" << endl;
     		while(1){
 
         	 	cin >> V >> E;  //Proceso la primera linea
@@ -59,6 +59,7 @@ int main(int argc, char* argv[]){
     	
 
     	case 2:
+			cout << "Instancia;V;E;Pmx;Tiempo;" << endl;
   			while(1){
   			    cin >> V >> E;  //Proceso la primera linea
 
@@ -86,6 +87,7 @@ int main(int argc, char* argv[]){
     	    break;
 	   		
 		case 3:
+			cout << "Instancia;V;E;pctConst;Tiempo;" << endl;
 			while(1){
 			    cin >> V;	    //Proceso la primera linea
 			    if(V == -1){		//Si es la linea del -1 -1 termino
@@ -96,12 +98,15 @@ int main(int argc, char* argv[]){
 			    int c2;
 			    bool construida;
 			    int peso;
+			    float cantConst=0;
+			   	float pctConst;
 			    E = (V * (V - 1)) / 2;
 			    for (int i = 0; i < E; ++i)
 			    {
 			        cin >> c1 >> c2 >> construida >> peso;
 			        if(construida){
 			            peso = peso * (-1);
+			            cantConst++;
 			        }
 			      	//Se resta 1 a c1 y c2 porque indexamos desde 0
 			      	grafo.agregarEje(c1 - 1 , c2 - 1, peso);
@@ -111,7 +116,8 @@ int main(int argc, char* argv[]){
 			    auto start = ya();
 				int sol = ejercicio3(grafo);
 				auto stop = ya();
-			    cout << j + 1 << ";"<< V << ";" << E << ";" << chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() << endl;
+				pctConst = (cantConst/E)*100;
+			    cout << j + 1 << ";"<< V << ";" << E << ";" << pctConst << ";" << chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() << endl;
 			    j++;
 			 }
 			break;
