@@ -1,3 +1,6 @@
+#Crea directorios si no existe
+mkdir -p ../../Inputs/Ej1/insTiempo
+mkdir -p ../../Outputs/Ej1/outsTiempo
 
 tams=(5 10 20 50 75 100 200 500)
 for((i = 0 ; i < 8; i+=1));do
