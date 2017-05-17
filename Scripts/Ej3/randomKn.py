@@ -9,6 +9,7 @@ cant_entradas = int(sys.argv[2])
 ejes = (n*(n-1))/2
 
 for c in range(0, cant_entradas):
+	print n
 	u = 1
 	while(u <= n):
 		v = u+1
