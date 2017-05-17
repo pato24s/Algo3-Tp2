@@ -59,7 +59,6 @@ int main(int argc, char* argv[]){
     	
 
     	case 2:
-   			int j = 0;
   			while(1){
   			    cin >> V >> E;  //Proceso la primera linea
 
