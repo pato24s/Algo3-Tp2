@@ -140,8 +140,20 @@ class GrafoConPeso : public Grafo{
 		//Crea un grafo vacio
 		struct pesoComp {
 	
-			bool operator() (const Eje& lhs, const Eje& rhs) const
-			{return lhs.damePeso() < rhs.damePeso();}
+			bool operator() (const Eje& lhs, const Eje& rhs) const{
+				int e1Peso = lhs.damePeso();
+				int e1U = lhs.dameU();
+				int e1V = lhs.dameV();
+				int e2Peso = rhs.damePeso();
+				int e2U = rhs.dameU();
+				int e2V = rhs.dameV();
+				bool pesoE1Menor = e1Peso < e2Peso;
+				bool pesosIguales = e1Peso == e2Peso;
+				bool uE1Menor = e1U < e2U;
+				bool usIguales = e1U == e2U;
+
+				return (pesoE1Menor) || (pesosIguales && uE1Menor) || (pesosIguales && usIguales && e1V < e2V);
+			}
 		};
 		GrafoConPeso() {};
 		
