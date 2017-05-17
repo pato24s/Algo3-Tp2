@@ -27,3 +27,11 @@ clean:
 	rm -f $(EJS)
 	rm -f $(OBJS)
 	rm -f *.o
+
+borrar_datos:
+	rm Inputs/Ej1/insTiempo/*ej1*
+	rm Inputs/Ej2/insTiempo/*ej2*
+	rm Inputs/Ej3/insTiempo/*ej3*
+	rm Outputs/Ej1/outsTiempo/*ej1*
+	rm Outputs/Ej2/outsTiempo/*ej2*
+	rm Outputs/Ej3/outsTiempo/*ej3*

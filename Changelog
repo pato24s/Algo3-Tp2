@@ -31,7 +31,13 @@ Changelog
 15/5/17
 	
 	- Fix al Ejercicio 1
-	- Nuevo tiempos.cpp para calcular los tiempos de cada ejercicio e imprimirlos por pantalla en formato .csv
-	- Modificado random_ejer1.py para crear instancias con n fijo y m, k variables
-	- Nueva carpeta Outputs para los scripts
+	- Nuevo tiempos.cpp para calcular los tiempos de cada ejercicio e imprimirlos por pantalla en formato .csv.
+	- Modificado random_ejer1.py para crear instancias con n fijo y m, k variables.
+	- Nueva carpeta Outputs para los scripts.
 	- Ejer 3 mas testado, parece funcionar.
+
+17/5/17
+	
+	- Fixes a correrExp_Ej1.sh para que cree los directorios necesarios si no existen.
+	- Graficador para el ejercicio 1.
+	- Los tiempos se miden en segundos en vez de nanosegundos
