@@ -215,14 +215,14 @@ int ejercicio3(GrafoConPeso &g){
     int Ve = g.dameV();
 
     //DEBUG
-    cout << "lista de aristas: " << endl;
+   /* cout << "lista de aristas: " << endl;
     for (std::set<Eje>::iterator it = g.aristasInicio(); it != g.aristasFin(); ++it){
         int u = (*it).dameU();
         int v = (*it).dameV();
         int weight = (*it).damePeso();
         cout << "(" << u + 1 << "," << v + 1 << ") p: " << weight << endl;
     }
-    
+    */
     vector<pair<int, int> > solucion_ejes;
     kruskal_init(Ve);
 
@@ -234,7 +234,7 @@ int ejercicio3(GrafoConPeso &g){
         int eje_p = (*iter).damePeso();
 
         if(kruskal_find(eje_u) != kruskal_find(eje_v)){
-            cout << "sirve eje: (" << eje_u + 1 << " " << eje_v + 1 << ")" << endl;
+          //  cout << "sirve eje: (" << eje_u + 1 << " " << eje_v + 1 << ")" << endl;
             //Agrego el eje a la solucion
             pair<int,int> ejeValido(eje_u, eje_v);
             solucion_ejes.push_back(ejeValido);
@@ -258,6 +258,6 @@ int ejercicio3(GrafoConPeso &g){
 
     }
     //Agregar flag
-    cout << costo << " " << solucion_ejes.size() << endl;
+    // cout << costo << " " << solucion_ejes.size() << endl;
     return costo;
 }
