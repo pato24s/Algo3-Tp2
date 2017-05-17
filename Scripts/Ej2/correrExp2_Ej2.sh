@@ -7,6 +7,6 @@ for((i = 0 ; i < ${#pesos[@]}; i+=1));do
 	# echo ${i}
 	printf '%s\n' "${pesos[${i}]} "
 	python random_ejer2_exp2.py ${pesos[i]} 50 > ../../Inputs/Ej2/insTiempo/ej2_exp2_${pesos[i]}
-	../../tiempo 2 < ../../Inputs/Ej2/insTiempo/ej2_exp2_${pesos[i]} >  ../../Outputs/Ej2/outsTiempo/prueba_exp2_${pesos[i]}.csv
+	../../tiempo 2 < ../../Inputs/Ej2/insTiempo/exp2/ej2_exp2_${pesos[i]} >  ../../Outputs/Ej2/outsTiempo/exp2/prueba_exp2_${pesos[i]}.csv
 done
 printf '%s\n'
