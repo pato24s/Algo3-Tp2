@@ -7,7 +7,7 @@ cd $current
 mkdir -p ../../Inputs/Ej1/insTiempo/exp2
 mkdir -p ../../Outputs/Ej1/outsTiempo/exp2
 
-perct_premiums=(5 10 20 50 75)
+perct_premiums=(5 10 20 50 75 100)
 for((i = 0 ; i < ${#perct_premiums[@]}; i+=1));do
 	# echo ${i}
 	printf '%s\n' "${perct_premiums[${i}]} "

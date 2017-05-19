@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
 	int E;
 	switch(ejer){
   		case 1:
-			cout << "Instancia;V;E;K;Tiempo;" << endl;
+			cout << "Instancia;V;E;K;cantPrem;pctK;Sol;Tiempo;" << endl;
     		while(1){
 
         	 	cin >> V >> E;  //Proceso la primera linea
@@ -41,18 +41,23 @@ int main(int argc, char* argv[]){
         	 	int c2;
         	 	bool premium;
         	 	int peso;
+        	 	int cantPrem = 0;
+        	 	float pctK = 0;
         	 	for (int i = 0; i < E; ++i)
         	 	{
         	 	    cin >> c1 >> c2 >> premium >> peso;
+        	 	    if(premium){
+        	 	    	cantPrem++;
+        	 	    }
         	 	    //Se resta 1 a c1 y c2 porque indexamos desde 0
         	 	    grafo.agregarEje(c1 - 1 , c2 - 1, peso, premium);
         	 	}
-		
+				pctK = (k / (float) cantPrem) * 100;
     		    //Se resta 1 a src y dst porque indexamos desde 0
     		    auto start = ya();
 				int sol = ejercicio1(grafo, src - 1, dst - 1, k);
 				auto stop = ya();
-    		    cout << j + 1 << ";"<< V << ";" << E << ";" << k << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
+    		    cout << j + 1 << ";"<< V << ";" << E << ";" << k << ";" << cantPrem << ";" << pctK << ";" << sol << ";" << chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() << endl;
     		    j++;
     		}
         	break;
@@ -81,7 +86,7 @@ int main(int argc, char* argv[]){
 			    auto start = ya();
 				int sol = ejercicio2(grafo, maxPeaje);
 				auto stop = ya();
-			    cout << j + 1 << ";"<< V << ";" << E << ";" << maxPeaje << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
+			    cout << j + 1 << ";"<< V << ";" << E << ";" << maxPeaje << ";" << chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() << endl;
 			    j++;
    			}
     	    break;
@@ -98,7 +103,7 @@ int main(int argc, char* argv[]){
 			    int c2;
 			    bool construida;
 			    int peso;
-			    float cantConst=0;
+			    float cantConst = 0;
 			   	float pctConst;
 			    E = (V * (V - 1)) / 2;
 			    for (int i = 0; i < E; ++i)
@@ -116,8 +121,10 @@ int main(int argc, char* argv[]){
 			    auto start = ya();
 				int sol = ejercicio3(grafo);
 				auto stop = ya();
-				pctConst = (cantConst/E)*100;
-			    cout << j + 1 << ";"<< V << ";" << E << ";" << pctConst << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
+				
+				pctConst = (cantConst / E) * 100;
+			    
+			    cout << j + 1 << ";"<< V << ";" << E << ";" << pctConst << ";" << chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() << endl;
 			    j++;
 			 }
 			break;

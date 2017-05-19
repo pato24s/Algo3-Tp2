@@ -15,9 +15,11 @@ nodos = 200
 
 for c in range(0, cant_entradas):
 	
-	ejes = int(random.uniform( (nodos / 2) ,(nodos * (nodos - 1) / 2) + 1)	 #Puede desde no tener aristas a ser completo
+	ejes = int(random.uniform((nodos / 2), (nodos * (nodos - 1) / 2) + 1))	
 	
-	prems = int(random.uniform( (ejes / 2) , (ejes / 4) + 1)	#Cantidad de premiums que depende de la cantidad de ejes
+	prems = int(random.uniform((ejes / 2), (ejes / 4) + 1))	#Cantidad de premiums que depende de la cantidad de ejes
+	
+	k = int((perct_premiums / float(100)) * prems)  #La cant maxima de premiums depende del parametro la cant de premiums
 	
 	Matrix = [[0 for x in range(nodos)] for y in range(nodos)] 
 
@@ -30,16 +32,15 @@ for c in range(0, cant_entradas):
 	while dst == src:
 		dst = int(random.uniform(1, nodos + 1))
 
-	k = (perct_premiums / 100) * prems  #La cant maxima de premiums depende del parametro la cant de premiums
 	print str(src) + " " + str(dst) + " " + str(k)
 
 	i = 0
-	while(i < prems): # Creo al azar rutas que pueden ser premium o no
+	while(i < prems): # Creo al azar rutas premium
 		c1 = int(random.uniform(1, nodos + 1))
 		c2 = int(random.uniform(1, nodos + 1))
 		while c2 == c1:
 			c2 = int(random.uniform(1, nodos + 1))
-		premium = int(random.uniform(0, 2))
+		premium = 1
 		peso = int(random.uniform(0, 51))	#Peso entre 0 y 50 incluido
 
 
