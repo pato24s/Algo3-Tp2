@@ -38,6 +38,7 @@ Changelog
 
 17/5/17
 	
-	- Fixes a correrExp_Ej1.sh para que cree los directorios necesarios si no existen.
+	- Fixes a todos los correrExp.sh para que creen los directorios necesarios si no existen.
 	- Graficador para el ejercicio 1.
 	- Los tiempos se miden en segundos en vez de nanosegundos
+	- Lista de experimentos

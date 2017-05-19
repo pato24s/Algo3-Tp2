@@ -1,6 +1,10 @@
+#!/bin/bash
+current=$(dirname $0)
+cd $current
+
 #Crea directorios si no existe
-mkdir -p ../../Inputs/Ej2/insTiempo
-mkdir -p ../../Outputs/Ej2/outsTiempo
+mkdir -p ../../Inputs/Ej2/insTiempo/exp1
+mkdir -p ../../Outputs/Ej2/outsTiempo/exp1
 
 pesos=(5 10 20 50 75 100 200 300 400 500 600 800)
 for((i = 0 ; i < ${#pesos[@]}; i+=1));do

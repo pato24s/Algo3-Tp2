@@ -52,7 +52,7 @@ int main(int argc, char* argv[]){
     		    auto start = ya();
 				int sol = ejercicio1(grafo, src - 1, dst - 1, k);
 				auto stop = ya();
-    		    cout << j + 1 << ";"<< V << ";" << E << ";" << k << ";" << chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() << endl;
+    		    cout << j + 1 << ";"<< V << ";" << E << ";" << k << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
     		    j++;
     		}
         	break;
@@ -81,7 +81,7 @@ int main(int argc, char* argv[]){
 			    auto start = ya();
 				int sol = ejercicio2(grafo, maxPeaje);
 				auto stop = ya();
-			    cout << j + 1 << ";"<< V << ";" << E << ";" << maxPeaje << ";" << chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() << endl;
+			    cout << j + 1 << ";"<< V << ";" << E << ";" << maxPeaje << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
 			    j++;
    			}
     	    break;
@@ -117,7 +117,7 @@ int main(int argc, char* argv[]){
 				int sol = ejercicio3(grafo);
 				auto stop = ya();
 				pctConst = (cantConst/E)*100;
-			    cout << j + 1 << ";"<< V << ";" << E << ";" << pctConst << ";" << chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() << endl;
+			    cout << j + 1 << ";"<< V << ";" << E << ";" << pctConst << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
 			    j++;
 			 }
 			break;
