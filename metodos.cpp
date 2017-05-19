@@ -4,15 +4,15 @@ using namespace std;
 
 /* ------------------ Ejer 1 ------------------ */
 
-pair<int,int> proximoNodo(int filas, int cols, vector<vector<pair<int, int> > > &dist, vector<vector<bool> > &visitados){
+pair<int,int> proximoNodo(int filas, int cols, vector<vector<int> > &dist, vector<vector<bool> > &visitados){
 	int min = INT_MAX;
     pair<int, int> min_ij;
 
     for (int i = 0; i < filas + 1; i++){
         for (int j = 0; j < cols; j++){
-            if(visitados[i][j] == false && dist[i][j].first <= min){
+            if(visitados[i][j] == false && dist[i][j] <= min){
             	pair<int, int> indices(i,j);
-                min = dist[i][j].first;
+                min = dist[i][j];
                 min_ij = indices;
             }    
         }
@@ -24,15 +24,12 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
     bool termine = false;
     int V = grafo.dameV();
 
-	pair<int, int> tuplaCero(0, 0);
-    pair<int, int> tuplaInf(INT_MAX, 0);
-    vector<vector<pair<int, int> > > dist(k + 1, vector<pair<int, int> >(V, tuplaInf));
+
+    vector<vector<int> > dist(k + 1, vector<int>(V, INT_MAX));
     vector<vector<bool> > visitados(k + 1, vector<bool>(V, false));
-	dist[0][src] = tuplaCero;
-	pair<int,int> elegido;
+	dist[0][src] = 0;
+	pair<int, int> elegido;
     
-    //DEBUG
-    int c = 0;
     // cout << "El origen es " << src + 1 << " y el destino es " << dest + 1 << endl; 
     for (int count = 0; count < (V*(k + 1)) - 1; count++){
         if(termine){
@@ -44,49 +41,37 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
         int nivel = elegido.first;
         int nodo = elegido.second;
 
-        //DEBUG
-        if(nivel == dist[nivel][nodo].second){
-        	c++;
-        	// cout << "Son iguales. C = " << c << endl;
-        }
-
-        int dist_elegido = dist[nivel][nodo].first;
+        int dist_elegido = dist[nivel][nodo];
 
         visitados[nivel][nodo] = true;
     
-        
-        for (int ik = 0; ik < k + 1; ik++){
-            if(termine){
-            	break;
-            }
-            for (int v = 0; v < V; v++){
-                if(!visitados[ik][v] && ik == nivel && grafo.conectados(nodo,v) && dist_elegido != INT_MAX && 
-                		dist_elegido + grafo.peso(nodo,v) < dist[ik][v].first){
-                    
-                    pair<int, int> tuplaCamino(dist_elegido + grafo.peso(nodo, v),
-                    	 nivel + grafo.esPremium(nodo,v));
+        for (int v = 0; v < V; v++){
+            int nuevaDist = dist_elegido + grafo.peso(nodo, v);
 
-                    int nuevoNivel = nivel + grafo.esPremium(nodo,v);
-                    if(nuevoNivel <= k){
-                        dist[nuevoNivel][v] = tuplaCamino;
-                        // cout<<"v: "<<v<<" ,ik: "<<ik<<endl;
-                        // cout<<" actualizando a: (" << nuevoNivel << "," << v + 1 << ") con valores: (" << tuplaCamino.first << "," << tuplaCamino.second <<")" << endl;
-                        if(v == dest){
-                        	
-                            termine = true;
-                        	break;
-                        }
+            if(!visitados[nivel][v] && grafo.conectados(nodo, v) && dist_elegido != INT_MAX && 
+            		nuevaDist < dist[nivel][v]){
+                
+                int nuevoNivel = nivel + grafo.esPremium(nodo, v);
+
+                if(nuevoNivel <= k){
+                    dist[nuevoNivel][v] = nuevaDist;
+                    // cout<<"v: "<<v<<" ,ik: "<<ik<<endl;
+                    // cout<<" actualizando a: (" << nuevoNivel << "," << v + 1 << ") con valores: (" << tuplaCamino.first << "," << tuplaCamino.second <<")" << endl;
+                    if(v == dest){
+                        termine = true;
+                    	break;
                     }
                 }
             }
         }
+        
         // cout << " Count = " << count << endl;
     }
 
     int result = INT_MAX;
     for(int i = 0; i < k + 1; i++){
-        if(dist[i][dest].first < result){
-            result = dist[i][dest].first;
+        if(dist[i][dest] < result){
+            result = dist[i][dest];
         }
     }
 
@@ -103,10 +88,10 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
  
 //Calcula la distancia del vertice 1 a todos los otros. Nos interesa checkear que
 //luego de relajar |V| - 1 veces las aristas, no queden ciclos negativos. 
-bool BellmanFord(DigrafoConPeso &g, int k)
+bool BellmanFord(DigrafoConPeso &grafo, int k)
 {
-    int V = g.dameV();
-    int E = g.dameE();
+    int V = grafo.dameV();
+    int E = grafo.dameE();
     int dist[V];
  
     //Inicializo distancias a todos los nodos como infinito 
@@ -118,7 +103,7 @@ bool BellmanFord(DigrafoConPeso &g, int k)
     //Relajo |v| - 1 veces todas las aristas para conseguir los caminos minimos.
     for (int i = 1; i <= V-1; i++)
     {
-        for (set<Eje>::iterator it = g.aristasInicio(); it != g.aristasFin(); ++it)
+        for (set<Eje>::iterator it = grafo.aristasInicio(); it != grafo.aristasFin(); ++it)
         {
             int u = (*it).dameU();
             int v = (*it).dameV();
@@ -129,7 +114,7 @@ bool BellmanFord(DigrafoConPeso &g, int k)
     }
  
     //Busco ciclos negativos con una iteracion de relajacion mas
-    for (set<Eje>::iterator it = g.aristasInicio(); it != g.aristasFin(); ++it)
+    for (set<Eje>::iterator it = grafo.aristasInicio(); it != grafo.aristasFin(); ++it)
     {
         int u = (*it).dameU();
         int v = (*it).dameV();
@@ -210,13 +195,13 @@ void kruskal_uni(int x, int y) {
 
 
 //Kruskal modificado
-int ejercicio3(GrafoConPeso &g){
+int ejercicio3(GrafoConPeso &grafo){
     int costo = 0;
-    int Ve = g.dameV();
+    int Ve = grafo.dameV();
 
     //DEBUG
    /* cout << "lista de aristas: " << endl;
-    for (std::set<Eje>::iterator it = g.aristasInicio(); it != g.aristasFin(); ++it){
+    for (std::set<Eje>::iterator it = grafo.aristasInicio(); it != grafo.aristasFin(); ++it){
         int u = (*it).dameU();
         int v = (*it).dameV();
         int weight = (*it).damePeso();
@@ -226,9 +211,9 @@ int ejercicio3(GrafoConPeso &g){
     vector<pair<int, int> > solucion_ejes;
     kruskal_init(Ve);
 
-    set<Eje>::iterator iter = g.aristasInicio();
+    set<Eje>::iterator iter = grafo.aristasInicio();
     
-    for (int j = 0; j < g.dameE(); ++j){
+    for (int j = 0; j < grafo.dameE(); ++j){
         int eje_u = (*iter).dameU();
         int eje_v = (*iter).dameV();
         int eje_p = (*iter).damePeso();

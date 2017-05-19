@@ -12,7 +12,7 @@
 
 
 /* ------------------ Ejer 1 ------------------------------------- */
-int proximoNodo(pair<int,int> dist[], bool visitados[], int V);
+pair<int,int> proximoNodo(int filas, int cols, vector<vector<int> > &dist, vector<vector<bool> > &visitados);
 
 int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k);
 
