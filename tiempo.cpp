@@ -119,7 +119,7 @@ int main(int argc, char* argv[]){
 
 			    //Se resta 1 a src y dst porque indexamos desde 0
 			    auto start = ya();
-				int sol = ejercicio3(grafo);
+				int sol = ejercicio3(grafo,true);
 				auto stop = ya();
 				
 				pctConst = (cantConst / E) * 100;

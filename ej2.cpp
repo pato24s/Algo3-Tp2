@@ -15,7 +15,7 @@ int main(){
         if(V == -1){     //Si es la linea del -1 -1 chau
             break;
         }
-        DigrafoConPeso grafo(V); //Creo digrafo con V vertices
+        DigrafoConPeso grafo(V+1); //Creo digrafo con V vertices
         int c1;
         int c2;
         int p;
@@ -25,7 +25,11 @@ int main(){
             cin >> c1 >> c2 >> p;
             if(p > maxPeaje)
                 maxPeaje = p;
-            grafo.agregarEje(c1, c2, p);
+            grafo.agregarEje(c1 - 1, c2 - 1, p);
+        }
+        for (int i = 0; i < V ; ++i)
+        {
+            grafo.agregarEje(V, i, maxPeaje);
         }
         cout<< "Solucion de la instancia " << j + 1 << ": " << ejercicio2(grafo, maxPeaje) << endl;
         j++;

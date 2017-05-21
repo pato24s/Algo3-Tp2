@@ -30,14 +30,11 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
 	dist[0][src] = 0;
 	pair<int, int> elegido;
     
-    // cout << "El origen es " << src + 1 << " y el destino es " << dest + 1 << endl; 
     for (int count = 0; count < (V*(k + 1)) - 1; count++){
         if(termine){
            	break;
         }
         elegido = proximoNodo(k, V, dist, visitados);
-        //DEBUG
-        // cout << "elegido: (" << elegido.first << "," << elegido.second + 1 << ")" << endl;
         int nivel = elegido.first;
         int nodo = elegido.second;
 
@@ -55,8 +52,6 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
 
                 if(nuevoNivel <= k){
                     dist[nuevoNivel][v] = nuevaDist;
-                    // cout<<"v: "<<v<<" ,ik: "<<ik<<endl;
-                    // cout<<" actualizando a: (" << nuevoNivel << "," << v + 1 << ") con valores: (" << tuplaCamino.first << "," << tuplaCamino.second <<")" << endl;
                     if(v == dest){
                         termine = true;
                     	break;
@@ -64,8 +59,6 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
                 }
             }
         }
-        
-        // cout << " Count = " << count << endl;
     }
 
     int result = INT_MAX;
@@ -98,8 +91,8 @@ bool BellmanFord(DigrafoConPeso &grafo, int k)
     for (int i = 0; i < V; i++){
         dist[i] = INT_MAX;
     }
-    dist[0] = 0;
- 
+    dist[V-1] = 0;
+    
     //Relajo |v| - 1 veces todas las aristas para conseguir los caminos minimos.
     for (int i = 1; i <= V-1; i++)
     {
@@ -108,12 +101,14 @@ bool BellmanFord(DigrafoConPeso &grafo, int k)
             int u = (*it).dameU();
             int v = (*it).dameV();
             int weight = (*it).damePeso() - k;
-            if (dist[u] != INT_MAX && dist[u] + weight < dist[v])
+            if (dist[u] != INT_MAX && dist[u] + weight < dist[v]){
                 dist[v] = dist[u] + weight;
+            }
         }
     }
  
     //Busco ciclos negativos con una iteracion de relajacion mas
+    int count=0;
     for (set<Eje>::iterator it = grafo.aristasInicio(); it != grafo.aristasFin(); ++it)
     {
         int u = (*it).dameU();
@@ -122,8 +117,8 @@ bool BellmanFord(DigrafoConPeso &grafo, int k)
         if (dist[u] != INT_MAX && dist[u] + weight < dist[v]){
             return true;
         }
+        count++;
     }
-    
     return false;
 }
  
@@ -138,23 +133,28 @@ int ejercicio2(DigrafoConPeso &grafo, int maxPeaje){
     int mid = (fin + init) / 2;
     
     //Busqueda binaria de la maxima reduccion
-    while(init <= fin){
+    while(init+1 != fin){
         reduccion = mid;
         
         perdemosPlata = BellmanFord(grafo, reduccion);
 
         if(perdemosPlata){
-        //Si perdemos plata solucion esta entre init y mid (hay que reducir menos el precio)
-            fin = mid - 1;
+            //Si perdemos plata solucion esta entre init y mid (hay que reducir menos el precio)
+            fin = mid;
         }else{
             //Si no perdemos plata podemos aumentar la reduccion 
             //La solucion esta entre entre mid y fin
-            init = mid + 1;
+            init = mid;
         }
         mid = (init + fin) / 2;
 
     }  
-    return reduccion;
+    bool pierdePlataFin = BellmanFord(grafo,fin);
+    if(!pierdePlataFin){
+        return fin;
+    }else{
+        return init;
+    }
 }
 
 /* ------------------ Ejer 3 ------------------ */
@@ -165,7 +165,7 @@ int padre[1000000];
 
 
 void kruskal_init(int n) {
-    for (int i = 1; i < n; ++i){
+    for (int i = 0; i < n; ++i){
               altura[i] = 1;
               padre[i] = i;
         }    
@@ -195,19 +195,10 @@ void kruskal_uni(int x, int y) {
 
 
 //Kruskal modificado
-int ejercicio3(GrafoConPeso &grafo){
+int ejercicio3(GrafoConPeso &grafo, bool modo_tiempo){
     int costo = 0;
     int Ve = grafo.dameV();
 
-    //DEBUG
-   /* cout << "lista de aristas: " << endl;
-    for (std::set<Eje>::iterator it = grafo.aristasInicio(); it != grafo.aristasFin(); ++it){
-        int u = (*it).dameU();
-        int v = (*it).dameV();
-        int weight = (*it).damePeso();
-        cout << "(" << u + 1 << "," << v + 1 << ") p: " << weight << endl;
-    }
-    */
     vector<pair<int, int> > solucion_ejes;
     kruskal_init(Ve);
 
@@ -219,7 +210,6 @@ int ejercicio3(GrafoConPeso &grafo){
         int eje_p = (*iter).damePeso();
 
         if(kruskal_find(eje_u) != kruskal_find(eje_v)){
-          //  cout << "sirve eje: (" << eje_u + 1 << " " << eje_v + 1 << ")" << endl;
             //Agrego el eje a la solucion
             pair<int,int> ejeValido(eje_u, eje_v);
             solucion_ejes.push_back(ejeValido);
@@ -242,7 +232,13 @@ int ejercicio3(GrafoConPeso &grafo){
         iter++;
 
     }
-    //Agregar flag
-    // cout << costo << " " << solucion_ejes.size() << endl;
+    //Imprime o no la solucion
+    if(!modo_tiempo){
+        cout << costo << " " << solucion_ejes.size();
+        for(int i = 0; i < solucion_ejes.size(); i++){
+            cout << "(" <<  solucion_ejes[i].first << ", " << solucion_ejes[i].second << ") " ;
+        }
+        cout << endl;
+    }
     return costo;
 }

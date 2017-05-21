@@ -28,7 +28,7 @@ int main(){
         }
 
         //Se resta 1 a src y dst porque indexamos desde 0
-        cout<<"Solucion de la instancia " << j + 1 << ": "<< ejercicio3(grafo) << endl;
+        cout<<"Solucion de la instancia " << j + 1 << ": "<< ejercicio3(grafo,false) << endl;
         j++;
     }
 

@@ -32,4 +32,4 @@ int kruskal_find(int x);
 void kruskal_uni(int x, int y);
 
 
-int ejercicio3(GrafoConPeso &grafo);
+int ejercicio3(GrafoConPeso &grafo, bool modo_tiempo);
