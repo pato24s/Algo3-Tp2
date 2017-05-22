@@ -15,7 +15,7 @@ int main(){
         if(V == -1){     //Si es la linea del -1 -1 chau
             break;
         }
-        DigrafoConPeso grafo(V+1); //Creo digrafo con V vertices
+        DigrafoConPeso grafo(V + 1); //Creo digrafo con V vertices y el nodo fantasma
         int c1;
         int c2;
         int p;
@@ -29,7 +29,7 @@ int main(){
         }
         for (int i = 0; i < V ; ++i)
         {
-            grafo.agregarEje(V, i, maxPeaje);
+            grafo.agregarEje(V, i, 0);
         }
         cout<< "Solucion de la instancia " << j + 1 << ": " << ejercicio2(grafo, maxPeaje) << endl;
         j++;

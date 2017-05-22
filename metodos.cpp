@@ -128,32 +128,33 @@ int ejercicio2(DigrafoConPeso &grafo, int maxPeaje){
     int reduccion;
     
     bool perdemosPlata;
-    int init = 0;
+    int comienzo = 0;
     int fin = maxPeaje;
-    int mid = (fin + init) / 2;
+    int mid = (fin + comienzo) / 2;
     
     //Busqueda binaria de la maxima reduccion
-    while(init+1 != fin){
+    while(comienzo + 1 != fin){
         reduccion = mid;
         
         perdemosPlata = BellmanFord(grafo, reduccion);
 
         if(perdemosPlata){
-            //Si perdemos plata solucion esta entre init y mid (hay que reducir menos el precio)
+            //Si perdemos plata solucion esta entre comienzo y mid (hay que reducir menos el precio)
             fin = mid;
         }else{
             //Si no perdemos plata podemos aumentar la reduccion 
             //La solucion esta entre entre mid y fin
-            init = mid;
+            comienzo = mid;
         }
-        mid = (init + fin) / 2;
+        mid = (comienzo + fin) / 2;
 
     }  
-    bool pierdePlataFin = BellmanFord(grafo,fin);
+    //Vemos si perdimos o no plata en la ultima iteracion
+    bool pierdePlataFin = BellmanFord(grafo, fin);
     if(!pierdePlataFin){
         return fin;
     }else{
-        return init;
+        return comienzo;
     }
 }
 

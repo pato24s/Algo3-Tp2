@@ -71,7 +71,7 @@ int main(int argc, char* argv[]){
 			    if(V == -1){     //Si es la linea del -1 -1 chau
 			        break;
 			    }
-			    DigrafoConPeso grafo(V); //Creo digrafo con V vertices
+			    DigrafoConPeso grafo(V + 1); //Creo digrafo con V vertices y el nodo fantasma
 			    int c1;
 			    int c2;
 			    int p;
@@ -81,8 +81,11 @@ int main(int argc, char* argv[]){
 			        cin >> c1 >> c2 >> p;
 			        if(p > maxPeaje)
 			            maxPeaje = p;
-			        grafo.agregarEje(c1, c2, p);
+			        grafo.agregarEje(c1 - 1, c2 - 1, p);
 			    }
+			    for (int i = 0; i < V ; ++i){
+            		grafo.agregarEje(V, i, 0);
+        		}
 			    auto start = ya();
 				int sol = ejercicio2(grafo, maxPeaje);
 				auto stop = ya();
