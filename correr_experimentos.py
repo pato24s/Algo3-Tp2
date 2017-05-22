@@ -1,7 +1,7 @@
 import os
 from subprocess import call
 
-call(["Scripts/Ej1/correrEj1_Exp1.sh"])
+call(["Scripts/Ej1/correrEj1_exp1.sh"])
 #call(["Scripts/Ej1/correrExp1_Ej1.sh"])
 #
 #call(["Scripts/Ej2/correrExp1_Ej2.sh"])
