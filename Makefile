@@ -29,9 +29,9 @@ clean:
 	rm -f *.o
 
 borrar_datos:
-	rm Inputs/Ej1/insTiempo/*ej1*
-	rm Inputs/Ej2/insTiempo/*ej2*
-	rm Inputs/Ej3/insTiempo/*ej3*
-	rm Outputs/Ej1/outsTiempo/*ej1*
-	rm Outputs/Ej2/outsTiempo/*ej2*
-	rm Outputs/Ej3/outsTiempo/*ej3*
+	sudo rm -rvf Inputs/Ej1/insTiempo
+	sudo rm -rvf Inputs/Ej2/insTiempo
+	sudo rm -rvf Inputs/Ej3/insTiempo
+	sudo rm -rvf Outputs/Ej1/outsTiempo
+	sudo rm -rvf Outputs/Ej2/outsTiempo
+	sudo rm -rvf Outputs/Ej3/outsTiempo
