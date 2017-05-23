@@ -52,7 +52,11 @@ int main(int argc, char* argv[]){
         	 	    //Se resta 1 a c1 y c2 porque indexamos desde 0
         	 	    grafo.agregarEje(c1 - 1 , c2 - 1, peso, premium);
         	 	}
-				pctK = (k / (float) cantPrem) * 100;
+				if(!cantPrem == 0.0){
+					pctK = (k / (float) cantPrem) * 100;
+				} else {
+					pctK = 0;
+				}
     		    //Se resta 1 a src y dst porque indexamos desde 0
     		    auto start = ya();
 				int sol = ejercicio1(grafo, src - 1, dst - 1, k);
