@@ -2,6 +2,8 @@
 current=$(dirname $0)
 cd $current
 
+printf '%s\n' "Corriendo el experimento 1 del ejercicio 3, con n: "
+
 #Crea directorios si no existe
 mkdir -p ../../Outputs/Ej3/outsTiempo/exp1
 mkdir -p ../../Inputs/Ej3/insTiempo/exp1

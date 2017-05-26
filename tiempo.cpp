@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
 	int E;
 	switch(ejer){
   		case 1:
-			cout << "Instancia;V;E;K;cantPrem;pctK;Sol;Tiempo;" << endl;
+			cout << "Instancia;V;E;K;CantPrem;PctK;Sol;Tiempo;" << endl;
     		while(1){
 
         	 	cin >> V >> E;  //Proceso la primera linea
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]){
     	
 
     	case 2:
-			cout << "Instancia;V;E;Pmx;Tiempo;" << endl;
+			cout << "Instancia;V;E;MaxPeaje;Tiempo;" << endl;
   			while(1){
   			    cin >> V >> E;  //Proceso la primera linea
 
@@ -99,7 +99,7 @@ int main(int argc, char* argv[]){
     	    break;
 	   		
 		case 3:
-			cout << "Instancia;V;E;pctConst;Tiempo;" << endl;
+			cout << "Instancia;V;E;PctConst;Tiempo;" << endl;
 			while(1){
 			    cin >> V;	    //Proceso la primera linea
 			    if(V == -1){		//Si es la linea del -1 -1 termino
