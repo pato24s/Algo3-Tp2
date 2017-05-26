@@ -99,7 +99,7 @@ int main(int argc, char* argv[]){
     	    break;
 	   		
 		case 3:
-			cout << "Instancia;V;E;pctConst;Tiempo;" << endl;
+			cout << "Instancia;V;E;Tiempo;" << endl;
 			while(1){
 			    cin >> V;	    //Proceso la primera linea
 			    if(V == -1){		//Si es la linea del -1 -1 termino
@@ -129,9 +129,9 @@ int main(int argc, char* argv[]){
 				int sol = ejercicio3(grafo,true);
 				auto stop = ya();
 				
-				pctConst = (cantConst / E) * 100;
+				
 			    
-			    cout << j + 1 << ";"<< V << ";" << E << ";" << pctConst << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
+			    cout << j + 1 << ";"<< V << ";" << E << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
 			    j++;
 			 }
 			break;
