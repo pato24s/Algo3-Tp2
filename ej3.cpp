@@ -14,17 +14,16 @@ int main(){
         GrafoConPeso grafo(V);
         int c1;
         int c2;
-        bool construida;
+        int construida;
         int peso;
         int E = (V * (V - 1)) / 2;
+        
         for (int i = 0; i < E; ++i)
         {
             cin >> c1 >> c2 >> construida >> peso;
-            if(construida){
-                peso = peso * (-1);
-            }
           	//Se resta 1 a c1 y c2 porque indexamos desde 0
-          	grafo.agregarEje(c1 - 1 , c2 - 1, peso);
+          	Eje nuevaArista(c1 - 1, c2 - 1, peso, construida);
+            grafo.agregarEje(nuevaArista);
         }
 
         //Se resta 1 a src y dst porque indexamos desde 0

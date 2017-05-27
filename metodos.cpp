@@ -194,25 +194,55 @@ void kruskal_uni(int x, int y) {
     }
 }
 
+//Struct para poder ordenar las aristas de menor a mayor en el conjunto.
+struct pesoComp {
+	
+	bool operator() (const Eje& lhs, const Eje& rhs) const{
+		int e1Peso = lhs.damePeso();
+		int e1U = lhs.dameU();
+		int e1V = lhs.dameV();
+		int e2Peso = rhs.damePeso();
+		int e2U = rhs.dameU();
+		int e2V = rhs.dameV();
+		bool pesoE1Menor = e1Peso < e2Peso;
+		bool pesosIguales = e1Peso == e2Peso;
+		bool uE1Menor = e1U < e2U;
+		bool usIguales = e1U == e2U;
 
-//Kruskal modificado
+		return (pesoE1Menor) || (pesosIguales && uE1Menor) || (pesosIguales && usIguales && e1V < e2V);
+	}
+};
+
+//Kruskal modificado. Altera el peso de las aristas construidas del grafo. Si modo_tiempo es no se imprime
+//el vector solucion por pantalla.
 int ejercicio3(GrafoConPeso &grafo, bool modo_tiempo){
+    
+	//Almacena las aristas del grafo ordenadas de menor a mayor peso
+    set<Eje, pesoComp> aristasOrdenadas;
+    //Ordena las aristas del grafo de menor a mayor peso.
+    for(set<Eje>::iterator it = grafo.aristasInicio(); it != grafo.aristasFin(); it++){
+    	Eje arista = *it;
+    	//Si esta construida, cambiamos el signo del peso.
+    	if(arista.dameConstruida()){
+    		arista.setPeso(arista.damePeso() * (-1));
+    	}
+    	aristasOrdenadas.insert(arista);
+    }
+
     int costo = 0;
     int Ve = grafo.dameV();
 
     vector<pair<int, int> > solucion_ejes;
     kruskal_init(Ve);
-
-    set<Eje>::iterator iter = grafo.aristasInicio();
     
-    for (int j = 0; j < grafo.dameE(); ++j){
+    for (set<Eje>::iterator iter = aristasOrdenadas.begin(); iter != aristasOrdenadas.end(); iter++){
         int eje_u = (*iter).dameU();
         int eje_v = (*iter).dameV();
         int eje_p = (*iter).damePeso();
 
         if(kruskal_find(eje_u) != kruskal_find(eje_v)){
-            //Agrego el eje a la solucion
-            pair<int,int> ejeValido(eje_u, eje_v);
+            //Agrego el eje a la solucion. Sumamos 1 porque indexamos desde 0.
+            pair<int,int> ejeValido(eje_u + 1, eje_v + 1);
             solucion_ejes.push_back(ejeValido);
             
             //Si el peso era negativo no agrego el costo (ya la tengo construida)
@@ -224,18 +254,16 @@ int ejercicio3(GrafoConPeso &grafo, bool modo_tiempo){
             kruskal_uni(eje_u, eje_v);
 
 
-        }else{
+        } else {
             //No sirve la arista, si estaba construida tengo que agregar costo de destruccion
             if(eje_p < 0){
                 costo += (eje_p) * (-1);
             }
         }
-        iter++;
-
     }
     //Imprime o no la solucion
     if(!modo_tiempo){
-        cout << costo << " " << solucion_ejes.size();
+        cout << costo << " " << solucion_ejes.size() << " ";
         for(int i = 0; i < solucion_ejes.size(); i++){
             cout << "(" <<  solucion_ejes[i].first << ", " << solucion_ejes[i].second << ") " ;
         }

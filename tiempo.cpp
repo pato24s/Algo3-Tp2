@@ -99,7 +99,9 @@ int main(int argc, char* argv[]){
     	    break;
 	   		
 		case 3:
-			cout << "Instancia;V;E;PctConst;Tiempo;" << endl;
+
+			cout << "Instancia;V;E;Tiempo;" << endl;
+
 			while(1){
 			    cin >> V;	    //Proceso la primera linea
 			    if(V == -1){		//Si es la linea del -1 -1 termino
@@ -108,30 +110,22 @@ int main(int argc, char* argv[]){
 			    GrafoConPeso grafo(V);
 			    int c1;
 			    int c2;
-			    bool construida;
+			    int construida;
 			    int peso;
-			    float cantConst = 0;
-			   	float pctConst;
 			    E = (V * (V - 1)) / 2;
-			    for (int i = 0; i < E; ++i)
-			    {
+			    for (int i = 0; i < E; ++i){
 			        cin >> c1 >> c2 >> construida >> peso;
-			        if(construida){
-			            peso = peso * (-1);
-			            cantConst++;
-			        }
 			      	//Se resta 1 a c1 y c2 porque indexamos desde 0
-			      	grafo.agregarEje(c1 - 1 , c2 - 1, peso);
+			      	Eje nuevaArista(c1 - 1, c2 - 1, peso, construida);
+           			grafo.agregarEje(nuevaArista);
 			    }
 
 			    //Se resta 1 a src y dst porque indexamos desde 0
 			    auto start = ya();
-				int sol = ejercicio3(grafo,true);
+				int sol = ejercicio3(grafo, true);
 				auto stop = ya();
-				
-				pctConst = (cantConst / E) * 100;
 			    
-			    cout << j + 1 << ";"<< V << ";" << E << ";" << pctConst << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
+			    cout << j + 1 << ";"<< V << ";" << E << ";" << chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << endl;
 			    j++;
 			 }
 			break;

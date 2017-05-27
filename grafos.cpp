@@ -136,10 +136,8 @@ GrafoConPeso::GrafoConPeso(int Ve){
 	E = 0;
 }
 
-void GrafoConPeso::agregarEje(int u, int v, int peso){
-	Eje nuevaArista(u, v, peso);
-	aristas.insert(nuevaArista);
-
+void GrafoConPeso::agregarEje(Eje e){
+	aristas.insert(e);
 	E = aristas.size();
 }
 

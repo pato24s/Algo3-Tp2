@@ -3,38 +3,34 @@
 
 using namespace std;
 
-class Eje{
+class Eje{	//Para ejercicio 3
 	public:
-		//Varios constructores para distintos tipos de ejes (con o sin peso, premium o no premium)
-		Eje(int n1, int n2, int p, int prem): u(n1), v(n2), peso(p), premium(prem) {} //No se usa
-		Eje(int n1, int n2, int p): u(n1), v(n2), peso(p), premium(-1) {}
-		Eje(int n1, int n2): u(n1), v(n2), peso(0), premium(-1) {}
+		//Varios constructores para distintos tipos de ejes (con o sin peso, construida o no)
+		Eje(int n1, int n2, int p, int c): u(n1), v(n2), peso(p), construida(c) {}
+		Eje(int n1, int n2, int p): u(n1), v(n2), peso(p), construida(-1) {}
 		
 		//Getters
 		int dameU() const {return u;}
 		int dameV() const {return v;}
 		int damePeso() const {return peso;}
-		int damePremium() const {return premium;}
+		int dameConstruida() const {return construida;}
 
 		//Setters
 		int setU(int nodo) {u = nodo;}
 		int setV(int nodo) {v = nodo;}
 		int setPeso(int p) {peso = p;}
-		int setPremium(int prem) {premium = prem;}
+		int setConstruida(int c) {construida = c;}
 
 		bool operator<(const Eje& ej) const{
-   			return peso < ej.peso || u < ej.u || v < ej.v;  //assume that you compare the record based on a
+   			return peso < ej.peso || u < ej.u || v < ej.v;
 		}
-
-		
-
 
 	private:
 
 		int u;
 		int v;
 		int peso;
-		int premium;
+		int construida;
 
 
 };
@@ -138,23 +134,7 @@ class DigrafoConPeso : public Grafo{
 class GrafoConPeso : public Grafo{
 	public:
 		//Crea un grafo vacio
-		struct pesoComp {
-	
-			bool operator() (const Eje& lhs, const Eje& rhs) const{
-				int e1Peso = lhs.damePeso();
-				int e1U = lhs.dameU();
-				int e1V = lhs.dameV();
-				int e2Peso = rhs.damePeso();
-				int e2U = rhs.dameU();
-				int e2V = rhs.dameV();
-				bool pesoE1Menor = e1Peso < e2Peso;
-				bool pesosIguales = e1Peso == e2Peso;
-				bool uE1Menor = e1U < e2U;
-				bool usIguales = e1U == e2U;
-
-				return (pesoE1Menor) || (pesosIguales && uE1Menor) || (pesosIguales && usIguales && e1V < e2V);
-			}
-		};
+		
 		GrafoConPeso() {};
 		
 		//Crea un grafo con Ve vertices disconexos
@@ -163,16 +143,16 @@ class GrafoConPeso : public Grafo{
 		~GrafoConPeso() {};
 
 		//Agrega un eje con peso entre u y v al grafo
-		void agregarEje(int u, int v, int peso);
+		void agregarEje(Eje e);
 
 		//Requiere que conectados(u, v) sea true. Devuelve el peso de la conexion entre u y v. 
 		int peso(int u, int v);
 
 		//Devuelve un iterador al inicio de la lista de aristas. Puede modificar elementos.
-		set<Eje, pesoComp>::iterator aristasInicio();
+		set<Eje>::iterator aristasInicio();
 
 		//Devuelve un iterador al final de la lista de aristas. Puede modificar elementos.
-		set<Eje, pesoComp>::iterator aristasFin();
+		set<Eje>::iterator aristasFin();
 
 		//Getters
 		int dameV() {return V;}
@@ -180,7 +160,7 @@ class GrafoConPeso : public Grafo{
 
 	private:
 
-		set<Eje, pesoComp> aristas;
+		set<Eje> aristas;
 		int V;
 		int E;
 
