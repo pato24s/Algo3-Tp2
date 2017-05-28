@@ -20,16 +20,17 @@ int main(){
         int c2;
         int p;
         int maxPeaje = -1000;        //Se asume que ninguna arista tiene peso menor a -1000.
-        for (int i = 0; i < E; ++i)
-        {
+        for (int i = 0; i < E; ++i){
             cin >> c1 >> c2 >> p;
-            if(p > maxPeaje)
+            if(p > maxPeaje){
                 maxPeaje = p;
-            grafo.agregarEje(c1 - 1, c2 - 1, p);
+            }
+            Eje nuevaArista(c1 - 1, c2 - 1, p);
+            grafo.agregarEje(nuevaArista);
         }
-        for (int i = 0; i < V ; ++i)
-        {
-            grafo.agregarEje(V, i, 0);
+        for (int i = 0; i < V ; ++i){
+            Eje aristaFantasma(V, i, 0);
+            grafo.agregarEje(aristaFantasma);
         }
         cout<< "Solucion de la instancia " << j + 1 << ": " << ejercicio2(grafo, maxPeaje) << endl;
         j++;

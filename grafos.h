@@ -1,9 +1,10 @@
 #include <vector>
 #include <set>
+#include <limits.h>
 
 using namespace std;
 
-class Eje{	//Para ejercicio 3
+class Eje{	//Para ejercicios 2 y 3
 	public:
 		//Varios constructores para distintos tipos de ejes (con o sin peso, construida o no)
 		Eje(int n1, int n2, int p, int c): u(n1), v(n2), peso(p), construida(c) {}
@@ -80,7 +81,7 @@ class DigrafoConPeso{
 		~DigrafoConPeso() {};
 
 		//Agrega un eje con peso entre u y v al grafo
-		void agregarEje(int u, int v, int peso);
+		void agregarEje(Eje e);
 
 		//Requiere que conectados(u, v) sea true. Devuelve el peso de la conexion entre u y v. 
 		int peso(int u, int v);

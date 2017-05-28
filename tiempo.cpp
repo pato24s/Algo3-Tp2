@@ -80,15 +80,17 @@ int main(int argc, char* argv[]){
 			    int c2;
 			    int p;
 			    int maxPeaje = -1000;
-			    for (int i = 0; i < E; ++i)
-			    {
+			    for (int i = 0; i < E; ++i){
 			        cin >> c1 >> c2 >> p;
-			        if(p > maxPeaje)
+			        if(p > maxPeaje){
 			            maxPeaje = p;
-			        grafo.agregarEje(c1 - 1, c2 - 1, p);
+			        }
+			        Eje nuevaArista(c1 - 1, c2 - 1, p);
+            		grafo.agregarEje(nuevaArista);
 			    }
 			    for (int i = 0; i < V ; ++i){
-            		grafo.agregarEje(V, i, 0);
+            		Eje aristaFantasma(V, i, 0);
+            		grafo.agregarEje(aristaFantasma);
         		}
 			    auto start = ya();
 				int sol = ejercicio2(grafo, maxPeaje);

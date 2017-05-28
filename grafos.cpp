@@ -66,16 +66,19 @@ DigrafoConPeso::DigrafoConPeso(int Ve){
 	E = 0;
 }
 
-void DigrafoConPeso::agregarEje(int u, int v, int peso){
-	Eje nuevaArista(u, v, peso);
-	aristas.insert(nuevaArista);
-
+void DigrafoConPeso::agregarEje(Eje e){
+	aristas.insert(e);
 	E = aristas.size();
-
 }
 
 int DigrafoConPeso::peso(int u, int v){
-	return matriz[u][v];
+	for(set<Eje>::iterator it = aristas.begin(); it != aristas.end(); it++){
+		Eje arista = *it;
+		if(arista.dameU() == u && arista.dameV() == v){
+			return arista.damePeso();
+		}
+	}
+	return INT_MAX;
 }
 
 set<Eje>::iterator DigrafoConPeso::aristasInicio(){
@@ -99,7 +102,13 @@ void GrafoConPeso::agregarEje(Eje e){
 }
 
 int GrafoConPeso::peso(int u, int v){
-	return matriz[u][v];
+	for(set<Eje>::iterator it = aristas.begin(); it != aristas.end(); it++){
+		Eje arista = *it;
+		if(arista.dameU() == u && arista.dameV() == v){
+			return arista.damePeso();
+		}
+	}
+	return INT_MAX;
 }
 
 
