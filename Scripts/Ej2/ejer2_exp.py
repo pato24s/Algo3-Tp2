@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 #python random_ejer2.py nodos maxPeaje cant_entradas > out.txt
-#Crea cant_entradas de un digrafo que es un ciclo simple donde una arista tiene maxPeaje y las guarda en out.txt
+#Crea cant_entradas de un digrafo que es un ciclo simple donde una de las aristas tiene
+#el peso mas pesado maxPeaje, y las guarda en out.txt
 
 import sys
 import math

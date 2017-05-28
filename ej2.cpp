@@ -19,7 +19,7 @@ int main(){
         int c1;
         int c2;
         int p;
-        int maxPeaje = -1000;
+        int maxPeaje = -1000;        //Se asume que ninguna arista tiene peso menor a -1000.
         for (int i = 0; i < E; ++i)
         {
             cin >> c1 >> c2 >> p;

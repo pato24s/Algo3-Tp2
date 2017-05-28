@@ -8,7 +8,7 @@ int main(){
     while(1){
         int V;
         cin >> V;	    //Proceso la primera linea
-        if(V == -1){		//Si es la linea del -1 -1 termino
+        if(V == -1){	//Si es la linea del -1 -1 termino
             break;
         }
         GrafoConPeso grafo(V);

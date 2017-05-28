@@ -1,48 +1,5 @@
 #include "grafos.h"
 
-//Metodos de Grafo
-
-Grafo::Grafo(int Ve){
-	for (int i = 0; i < Ve; i++){
-		vector<int> fila;
-
-		for(int j = 0 ; j < Ve; j++){
-			fila.push_back(0);
-		}
-		matriz.push_back(fila);
-	}
-	
-	V = Ve;
-	E = 0;
-	
-}
-
-void Grafo::agregarEje(int u, int v){
-	//Si u o v son mas grandes que V, estoy agregando vertices al grafo ademas de aristas. Agrando la matriz
-	if(u > V){
-		matriz.resize(u);
-		for(int i = 0; i < matriz.size(); i++){
-			matriz[i].resize(u);
-		}
-	} else if(v > V){
-		matriz.resize(v);
-		for(int i = 0; i < matriz.size(); i++){
-			matriz[i].resize(v);
-		}
-	}
-	matriz[u][v] = 1;
-	matriz[v][u] = 1;
-	E++;
-}
-
-bool Grafo::conectados(int u, int v){
-	if(matriz[u][v]){
-		return true;
-	}
-	return false;
-}
-
-
 //Metodos de GrafoConPremium
 
 GrafoConPremium::GrafoConPremium(int Ve){

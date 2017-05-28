@@ -8,8 +8,6 @@
 #include <utility>
 #include "grafos.h"		//Clases de grafos
 
-/* ------------------ Constantes y defines ------------------ */
-
 
 /* ------------------ Ejer 1 ------------------------------------- */
 pair<int,int> proximoNodo(int filas, int cols, vector<vector<int> > &dist, vector<vector<bool> > &visitados);
@@ -24,12 +22,10 @@ int ejercicio2(DigrafoConPeso &grafo, int maxPeaje);
 
 /* ------------------ Ejer 3 ------------------------------------- */
 
-
 void kruskal_init(int n);
 
 int kruskal_find(int x);
 
 void kruskal_uni(int x, int y);
-
 
 int ejercicio3(GrafoConPeso &grafo, bool modo_tiempo);

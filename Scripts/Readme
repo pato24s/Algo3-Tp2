@@ -1,16 +1,10 @@
-Los scripts guardan los outputs en la carpeta "Outputs", salvo los que generan entradas, como randomK, que guardan en la carpeta Inputs.
+Los scripts correrEjX_expY.sh generan inputs con distintos tipos de grafos, y los guardan en la carpeta Inputs.
+Además, utilizan estos para medir tiempo y guardan los resultados en la carpeta Outputs/EjX/outsTiempo/expY.
+
+Los archivos txtToGraphX.py pueden usarse para graficar grafos sencillos, aunque no siempre funciona bien.
+Se ejecutan de la siguiente forma:
 
 
-random_ejer1:
-	python random_ejer1.py n m > salida_texto
-
-	ejemplo: 
-	python random_ejer1.py 10 15 > in.txt
-	guarda en in.txt un grafo con el formato de entrada requerido para el ejercicio 1 y
-	además guarda en random.png el dibujo
-
-
-txtToGraph.py
 	python txtToGraph.py < in.txt
 
-	recibe una instancia con el formato de la catedra y dibuja el grafo asociado.
+	Recibe una instancia con el formato de la catedra y dibuja el grafo asociado.

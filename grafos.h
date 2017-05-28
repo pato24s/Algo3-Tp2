@@ -26,7 +26,6 @@ class Eje{	//Para ejercicio 3
 		}
 
 	private:
-
 		int u;
 		int v;
 		int peso;
@@ -34,31 +33,6 @@ class Eje{	//Para ejercicio 3
 
 
 };
-
-class Grafo{
-	public:
-
-		Grafo() {};
-		Grafo(int Ve);
-		~Grafo() {};
-
-		//Agrega un eje entre u y v al grafo
-		virtual void agregarEje(int u, int v);
-
-		//Devuelve true si u y v estan conectados y false en caso contrario
-		virtual bool conectados(int u, int v);
-
-		//Getters
-		int dameV() {return V;}
-		int dameE() {return E;}
-
-	protected:
-		vector<vector<int> > matriz;
-		int V;
-		int E;
-
-};
-
 
 //Ejercicio 1. Grafo no dirigido con peso en los ejes y un booleano que indica si la ruta es o no premium
 class GrafoConPremium{
@@ -95,7 +69,7 @@ class GrafoConPremium{
 };
 
 //Ejercicio 2. Grafo dirigido con pesos.
-class DigrafoConPeso : public Grafo{
+class DigrafoConPeso{
 	public:
 		//Crea un grafo vacio
 		DigrafoConPeso() {};
@@ -117,11 +91,9 @@ class DigrafoConPeso : public Grafo{
 		//Devuelve un iterador al final de la lista de aristas. Puede modificar elementos.
 		set<Eje>::iterator aristasFin();
 
-				//Getters
+		//Getters
 		int dameV() {return V;}
 		int dameE() {return E;}
-
-
 
 	private:
 		set<Eje> aristas;
@@ -131,10 +103,9 @@ class DigrafoConPeso : public Grafo{
 };
 
 //Ejercicio 3. Grafo no dirigido con pesos.
-class GrafoConPeso : public Grafo{
+class GrafoConPeso{
 	public:
 		//Crea un grafo vacio
-		
 		GrafoConPeso() {};
 		
 		//Crea un grafo con Ve vertices disconexos
@@ -159,7 +130,6 @@ class GrafoConPeso : public Grafo{
 		int dameE() {return E;}
 
 	private:
-
 		set<Eje> aristas;
 		int V;
 		int E;

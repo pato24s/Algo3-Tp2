@@ -28,7 +28,7 @@ int main(int argc, char* argv[]){
     		while(1){
 
         	 	cin >> V >> E;  //Proceso la primera linea
-        	 	if(V == -1){  //Si es la linea del -1 -1 termino
+        	 	if(V == -1){  	//Si es la linea del -1 -1 termino
         	 	    break;
         	 	}   
         	 	int src;
@@ -72,7 +72,7 @@ int main(int argc, char* argv[]){
   			while(1){
   			    cin >> V >> E;  //Proceso la primera linea
 
-			    if(V == -1){     //Si es la linea del -1 -1 chau
+			    if(V == -1){    //Si es la linea del -1 -1 chau
 			        break;
 			    }
 			    DigrafoConPeso grafo(V + 1); //Creo digrafo con V vertices y el nodo fantasma
@@ -104,7 +104,7 @@ int main(int argc, char* argv[]){
 
 			while(1){
 			    cin >> V;	    //Proceso la primera linea
-			    if(V == -1){		//Si es la linea del -1 -1 termino
+			    if(V == -1){	//Si es la linea del -1 -1 termino
 			        break;
 			    }
 			    GrafoConPeso grafo(V);

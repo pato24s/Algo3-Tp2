@@ -1,12 +1,11 @@
 Ejer 1:
- - exp 1: tiempo en funcion de N
- - exp 2: n fijo, k variable
- - exp 3: n fijo, m variable
+ - exp 1: tiempo en funcion de cantidad de caminos en casos favorables y desfavorables de Djikstra.
+ - exp 2: cantidad de caminos variable con k variable en grafos particulares.
 
 Ejer 2:
- - exp 1: tiempo en funcion de N
- - exp 2: n fijo, pesoMax variable
+ - exp 1: tiempo en funcion de n.
+ - exp 2: tiempo en función del costo máximo de los peajes.
 
 Ejer 3:
- - exp 1: tiempo en funcion de n
- - exp 2: n fijo, % de rutas construidas variable
+ - exp 1: tiempo en funcion de n.
+ - exp 2: tiempo en un AGM de rutas construidas VS un Kn sin construir.
