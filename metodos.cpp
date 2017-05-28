@@ -24,12 +24,13 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
     bool termine = false;
     int V = grafo.dameV();
 
-
+    //Matrices de distancia y visitados
     vector<vector<int> > dist(k + 1, vector<int>(V, INT_MAX));
     vector<vector<bool> > visitados(k + 1, vector<bool>(V, false));
 	dist[0][src] = 0;
 	pair<int, int> elegido;
     
+
     for (int count = 0; count < (V*(k + 1)) - 1; count++){
         if(termine){
            	break;
@@ -52,6 +53,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
 
                 if(nuevoNivel <= k){
                     dist[nuevoNivel][v] = nuevaDist;
+                    //Si ya llegue al destino, termino los ciclos
                     if(v == dest){
                         termine = true;
                     	break;
@@ -61,6 +63,7 @@ int ejercicio1(GrafoConPremium &grafo, int src, int dest, int k){
         }
     }
 
+    //Buscamos el resultado final
     int result = INT_MAX;
     for(int i = 0; i < k + 1; i++){
         if(dist[i][dest] < result){
@@ -167,10 +170,9 @@ int padre[1000000];
 
 void kruskal_init(int n) {
     for (int i = 0; i < n; ++i){
-              altura[i] = 1;
-              padre[i] = i;
-        }    
-
+        altura[i] = 1;
+        padre[i] = i;
+    }    
 }
 
 int kruskal_find(int x) {
@@ -185,7 +187,7 @@ void kruskal_uni(int x, int y) {
     y = kruskal_find(y);
     if(altura[x] < altura[y]){
         padre[x] = y;
-    }else{
+    } else {
         padre[y] = x;
     }
 
@@ -213,12 +215,13 @@ struct pesoComp {
 	}
 };
 
-//Kruskal modificado. Altera el peso de las aristas construidas del grafo. Si modo_tiempo es no se imprime
+//Kruskal modificado. Altera el peso de las aristas construidas del grafo. Si modo_tiempo es true no se imprime
 //el vector solucion por pantalla.
 int ejercicio3(GrafoConPeso &grafo, bool modo_tiempo){
     
 	//Almacena las aristas del grafo ordenadas de menor a mayor peso
     set<Eje, pesoComp> aristasOrdenadas;
+    
     //Ordena las aristas del grafo de menor a mayor peso.
     for(set<Eje>::iterator it = grafo.aristasInicio(); it != grafo.aristasFin(); it++){
     	Eje arista = *it;
@@ -229,10 +232,12 @@ int ejercicio3(GrafoConPeso &grafo, bool modo_tiempo){
     	aristasOrdenadas.insert(arista);
     }
 
-    int costo = 0;
     int Ve = grafo.dameV();
 
+    //Guarda la solucion
+    int costo = 0;
     vector<pair<int, int> > solucion_ejes;
+    
     kruskal_init(Ve);
     
     for (set<Eje>::iterator iter = aristasOrdenadas.begin(); iter != aristasOrdenadas.end(); iter++){
@@ -245,7 +250,7 @@ int ejercicio3(GrafoConPeso &grafo, bool modo_tiempo){
             pair<int,int> ejeValido(eje_u + 1, eje_v + 1);
             solucion_ejes.push_back(ejeValido);
             
-            //Si el peso era negativo no agrego el costo (ya la tengo construida)
+            //Si el peso era negativo, no agrego el costo (ya la tengo construida)
             if(eje_p > 0){
                 costo += eje_p;
             }
@@ -255,7 +260,7 @@ int ejercicio3(GrafoConPeso &grafo, bool modo_tiempo){
 
 
         } else {
-            //No sirve la arista, si estaba construida tengo que agregar costo de destruccion
+            //No sirve la arista. Si estaba construida, tengo que agregar costo de destruccion
             if(eje_p < 0){
                 costo += (eje_p) * (-1);
             }

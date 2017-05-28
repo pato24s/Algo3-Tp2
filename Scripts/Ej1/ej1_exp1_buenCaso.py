@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#recibe cuantos caminos y de que largo va a tener el grafo y lo crea haciendo que el camino que va
+#Recibe cuantos caminos y de que largo va a tener el grafo y lo crea haciendo que el camino que va
 #de 1 a 2 sea el mas barato. Por ultimo recibe cuantas instancias se quieren.
 
 import sys

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-#recibe cuantos caminos y de que largo va a tener el grafo y lo crea distribuyendo los pesos de forma que
-#dijkstra tenga que ir alternando de camino en camino. Por ultimo recibe cuantas instancias se quieren.
+#Recibe cuantos caminos y de que largo va a tener el grafo y lo crea distribuyendo los pesos de forma que
+#Dijkstra tenga que ir alternando de camino en camino. Por ultimo recibe cuantas instancias se quieren.
 
 import sys
 import math
